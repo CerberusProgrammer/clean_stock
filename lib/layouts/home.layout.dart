@@ -1,9 +1,12 @@
+import 'package:clean_stock/components/breadcrumbs.dart';
 import 'package:clean_stock/components/drawerbar.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeLayout extends StatelessWidget {
-  const HomeLayout({super.key});
+  const HomeLayout({super.key, required this.children});
+
+  final Widget children;
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +18,23 @@ class HomeLayout extends StatelessWidget {
           return Scaffold(
             body: Row(
               children: [
-                // Contenido principal
                 const Drawerbar(),
                 Expanded(
                   flex: 5,
                   child: Scaffold(
-                    appBar: AppBar(title: const Text('Home')),
-                    body: const Center(
-                      child: Text('Home'),
+                    appBar: AppBar(
+                      title: const Text('Home'),
+                      automaticallyImplyLeading: false,
+                    ),
+                    body: Column(
+                      children: [
+                        Breadcrumbs(
+                            currentPath: GoRouter.of(context)
+                                .routerDelegate
+                                .currentConfiguration
+                                .fullPath),
+                        children,
+                      ],
                     ),
                   ),
                 ),
@@ -32,22 +44,8 @@ class HomeLayout extends StatelessWidget {
         } else {
           return Scaffold(
             appBar: AppBar(title: const Text('Home')),
-            drawer: Drawer(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ListView(
-                  children: [
-                    ListTile(
-                      title: const Text('Home'),
-                      onTap: () => context.go('/'),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            body: const Center(
-              child: Text('Home'),
-            ),
+            drawer: const Drawerbar(),
+            body: children,
           );
         }
       },
