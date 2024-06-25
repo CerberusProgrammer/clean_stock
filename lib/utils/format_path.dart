@@ -1,9 +1,14 @@
 String formatPath(String path) {
-  String newPath = path.replaceAll("/", "");
+  List<String> segments =
+      path.split("/").where((segment) => segment.isNotEmpty).toList();
 
-  if (newPath.isNotEmpty) {
-    newPath = newPath[0].toUpperCase() + newPath.substring(1);
+  if (segments.isNotEmpty) {
+    String lastSegment = segments.last;
+
+    if (lastSegment.isNotEmpty) {
+      return lastSegment[0].toUpperCase() + lastSegment.substring(1);
+    }
   }
 
-  return newPath;
+  return "";
 }
