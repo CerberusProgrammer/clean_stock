@@ -14,19 +14,30 @@ class Breadcrumbs extends StatelessWidget {
     List<Widget> breadcrumbWidgets = [];
     String cumulativePath = '';
 
-    for (var segment in pathSegments) {
-      cumulativePath += '/$segment';
-      breadcrumbWidgets.add(InkWell(
-        onTap: () {
-          context.go(cumulativePath);
-        },
-        child: Text(segment, style: const TextStyle(color: Colors.blue)),
-      ));
-      breadcrumbWidgets.add(const Text(' > '));
-    }
+    for (int i = 0; i < pathSegments.length; i++) {
+      String segment = pathSegments[i];
+      if (i < pathSegments.length - 1) {
+        cumulativePath += '/$segment';
+        breadcrumbWidgets.add(
+          TextButton(
+            onPressed: () => context.go(cumulativePath),
+            child: Text(
+              segment,
+            ),
+          ),
+        );
+      } else {
+        breadcrumbWidgets.add(
+          TextButton(
+            onPressed: null,
+            child: Text(segment),
+          ),
+        );
+      }
 
-    if (breadcrumbWidgets.isNotEmpty) {
-      breadcrumbWidgets.removeLast();
+      if (i < pathSegments.length - 1) {
+        breadcrumbWidgets.add(const Text(' > '));
+      }
     }
 
     return Row(children: breadcrumbWidgets);
