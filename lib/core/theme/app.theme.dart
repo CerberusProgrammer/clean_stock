@@ -6,12 +6,16 @@ final colorProvider = StateProvider<Color>((ref) {
   return Colors.indigo;
 });
 
+final brighnessProvider = StateProvider<Brightness>((ref) {
+  return Brightness.light;
+});
+
 final themeProvider = Provider<ThemeData>(
   (ref) => ThemeData(
     colorSchemeSeed: ref.watch(colorProvider),
-    brightness: Brightness.light,
+    brightness: ref.watch(brighnessProvider),
     textTheme: GoogleFonts.manropeTextTheme(
-      ThemeData(brightness: Brightness.light).textTheme,
+      ThemeData(brightness: ref.watch(brighnessProvider)).textTheme,
     ),
   ),
 );
