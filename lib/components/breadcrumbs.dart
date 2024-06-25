@@ -21,16 +21,14 @@ class Breadcrumbs extends StatelessWidget {
         breadcrumbWidgets.add(
           TextButton(
             onPressed: () => context.go(cumulativePath),
-            child: Text(
-              segment,
-            ),
+            child: Text(segment[0].toUpperCase() + segment.substring(1)),
           ),
         );
       } else {
         breadcrumbWidgets.add(
           TextButton(
             onPressed: null,
-            child: Text(segment),
+            child: Text(segment[0].toUpperCase() + segment.substring(1)),
           ),
         );
       }
