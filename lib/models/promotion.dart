@@ -1,5 +1,5 @@
 class Promotion {
-  final String userId;
+  final int id;
   final String name;
   final String? description;
   final double discountPercentage;
@@ -11,7 +11,7 @@ class Promotion {
   final bool status;
 
   Promotion({
-    required this.userId,
+    required this.id,
     required this.name,
     this.description,
     required this.discountPercentage,
@@ -24,7 +24,7 @@ class Promotion {
   });
 
   factory Promotion.fromJson(Map<String, dynamic> json) => Promotion(
-        userId: json['user'],
+        id: json['id'],
         name: json['name'],
         description: json['description'],
         discountPercentage: json['discount_percentage'],
@@ -37,7 +37,7 @@ class Promotion {
       );
 
   Map<String, dynamic> toJson() => {
-        'user': userId,
+        'id': id,
         'name': name,
         'description': description,
         'discount_percentage': discountPercentage,
@@ -56,6 +56,6 @@ class Promotion {
 
   @override
   String toString() {
-    return 'Promotion{userId: $userId, name: $name, description: $description, discountPercentage: $discountPercentage, startDate: $startDate, endDate: $endDate, productIds: $productIds, categoryIds: $categoryIds, createdAt: $createdAt, status: $status}';
+    return 'Promotion{id: $id, name: $name, description: $description, discountPercentage: $discountPercentage, startDate: $startDate, endDate: $endDate, productIds: $productIds, categoryIds: $categoryIds, createdAt: $createdAt, status: $status}';
   }
 }
