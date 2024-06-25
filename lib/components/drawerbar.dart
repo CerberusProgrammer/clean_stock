@@ -58,7 +58,6 @@ class _DrawerbarState extends State<Drawerbar> {
                   routeInfo['route'],
               onTap: () {
                 context.go(routeInfo['route'] as String);
-                setState(() {});
               },
             );
           }),
