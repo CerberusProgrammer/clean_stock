@@ -9,24 +9,24 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/',
       name: 'home',
-      builder: (context, route) => const HomePage(),
-      routes: [
-        GoRoute(
-            path: 'settings',
-            name: 'settings',
+      pageBuilder: (context, state) {
+        return const NoTransitionPage(child: HomePage());
+      },
+    ),
+    GoRoute(
+        path: '/settings',
+        name: 'settings',
+        pageBuilder: (context, state) {
+          return const NoTransitionPage(child: SettingsPage());
+        },
+        routes: [
+          GoRoute(
+            path: 'profile',
+            name: 'profile',
             pageBuilder: (context, state) {
-              return const NoTransitionPage(child: SettingsPage());
+              return const NoTransitionPage(child: ProfilePage());
             },
-            routes: [
-              GoRoute(
-                path: 'profile',
-                name: 'profile',
-                pageBuilder: (context, state) {
-                  return const NoTransitionPage(child: ProfilePage());
-                },
-              )
-            ])
-      ],
-    )
+          )
+        ])
   ],
 );
