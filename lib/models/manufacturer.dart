@@ -31,43 +31,39 @@ class Manufacturer {
     required this.updatedAt,
   });
 
-  factory Manufacturer.fromJson(Map<String, dynamic> json) {
-    return Manufacturer(
-      id: json['id'],
-      name: json['name'],
-      icon: json['icon'],
-      description: json['description'],
-      address: json['address'],
-      website: json['website'],
-      contactEmail: json['contact_email'],
-      contactPhone: json['contact_phone'],
-      country: json['country'],
-      city: json['city'],
-      status: json['status'],
-      color: json['color'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
-    );
-  }
+  factory Manufacturer.fromJson(Map<String, dynamic> json) => Manufacturer(
+        id: json['id'],
+        name: json['name'],
+        icon: json['icon'],
+        description: json['description'],
+        address: json['address'],
+        website: json['website'],
+        contactEmail: json['contact_email'],
+        contactPhone: json['contact_phone'],
+        country: json['country'],
+        city: json['city'],
+        status: json['status'],
+        color: json['color'],
+        createdAt: DateTime.parse(json['created_at']),
+        updatedAt: DateTime.parse(json['updated_at']),
+      );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'name': name,
-      'icon': icon,
-      'description': description,
-      'address': address,
-      'website': website,
-      'contact_email': contactEmail,
-      'contact_phone': contactPhone,
-      'country': country,
-      'city': city,
-      'status': status,
-      'color': color,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'name': name,
+        'icon': icon,
+        'description': description,
+        'address': address,
+        'website': website,
+        'contact_email': contactEmail,
+        'contact_phone': contactPhone,
+        'country': country,
+        'city': city,
+        'status': status,
+        'color': color,
+        'created_at': createdAt.toIso8601String(),
+        'updated_at': updatedAt.toIso8601String(),
+      };
 
   @override
   String toString() {
