@@ -17,14 +17,16 @@ const appRoutes = [
   }
 ];
 
-class Drawerbar extends StatelessWidget {
+class Drawerbar extends StatefulWidget {
   const Drawerbar({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final String currentPath =
-        GoRouter.of(context).routerDelegate.currentConfiguration.fullPath;
+  State<Drawerbar> createState() => _DrawerbarState();
+}
 
+class _DrawerbarState extends State<Drawerbar> {
+  @override
+  Widget build(BuildContext context) {
     return SizedBox(
       width: 200,
       child: Drawer(
@@ -38,7 +40,7 @@ class Drawerbar extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
@@ -49,8 +51,15 @@ class Drawerbar extends StatelessWidget {
               title: routeInfo['title'] as String,
               icon: routeInfo['icon'] as IconData,
               secondaryIcon: routeInfo['secondaryIcon'] as IconData,
-              isSelected: currentPath == routeInfo['route'],
-              onTap: () => context.go(routeInfo['route'] as String),
+              isSelected: GoRouter.of(context)
+                      .routerDelegate
+                      .currentConfiguration
+                      .fullPath ==
+                  routeInfo['route'],
+              onTap: () {
+                context.go(routeInfo['route'] as String);
+                setState(() {});
+              },
             );
           }),
         ]),
