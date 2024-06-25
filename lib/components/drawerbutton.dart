@@ -40,8 +40,10 @@ class Drawerbutton extends StatelessWidget {
             Icon(
               isSelected ? icon : secondaryIcon,
               color: isSelected
-                  ? Theme.of(context).primaryColor
-                  : Colors.black.withOpacity(0.2),
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).brightness != Brightness.light
+                      ? Colors.white.withOpacity(0.2)
+                      : Colors.black.withOpacity(0.2),
             ),
           const SizedBox(width: 24),
           Text(
@@ -49,8 +51,10 @@ class Drawerbutton extends StatelessWidget {
             style: TextStyle(
               fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               color: isSelected
-                  ? Theme.of(context).primaryColor
-                  : Colors.black.withOpacity(0.2),
+                  ? Theme.of(context).colorScheme.primary
+                  : Theme.of(context).brightness != Brightness.light
+                      ? Colors.white.withOpacity(0.2)
+                      : Colors.black.withOpacity(0.2),
             ),
           ),
         ],
