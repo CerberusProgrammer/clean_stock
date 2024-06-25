@@ -37,9 +37,22 @@ class Drawerbutton extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           if (icon != null || secondaryIcon != null)
-            Icon(isSelected ? icon : secondaryIcon),
+            Icon(
+              isSelected ? icon : secondaryIcon,
+              color: isSelected
+                  ? Theme.of(context).primaryColor
+                  : Colors.black.withOpacity(0.2),
+            ),
           const SizedBox(width: 24),
-          Text(title),
+          Text(
+            title,
+            style: TextStyle(
+              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              color: isSelected
+                  ? Theme.of(context).primaryColor
+                  : Colors.black.withOpacity(0.2),
+            ),
+          ),
         ],
       ),
     );
