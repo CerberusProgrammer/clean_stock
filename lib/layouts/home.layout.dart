@@ -1,5 +1,6 @@
 import 'package:clean_stock/components/breadcrumbs.dart';
 import 'package:clean_stock/components/drawerbar.dart';
+import 'package:clean_stock/utils/format_path.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,19 +23,20 @@ class HomeLayout extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: Scaffold(
-                    appBar: AppBar(
-                      title: const Text('Home'),
-                      automaticallyImplyLeading: false,
+                    appBar: PreferredSize(
+                      preferredSize: const Size(double.infinity, 56),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Breadcrumbs(
+                          currentPath: GoRouter.of(context)
+                              .routerDelegate
+                              .currentConfiguration
+                              .fullPath,
+                        ),
+                      ),
                     ),
                     body: Column(
-                      children: [
-                        Breadcrumbs(
-                            currentPath: GoRouter.of(context)
-                                .routerDelegate
-                                .currentConfiguration
-                                .fullPath),
-                        children,
-                      ],
+                      children: [children],
                     ),
                   ),
                 ),
@@ -43,7 +45,14 @@ class HomeLayout extends StatelessWidget {
           );
         } else {
           return Scaffold(
-            appBar: AppBar(title: const Text('Home')),
+            appBar: AppBar(
+              title: Text(formatPath(
+                GoRouter.of(context)
+                    .routerDelegate
+                    .currentConfiguration
+                    .fullPath,
+              )),
+            ),
             drawer: const Drawerbar(),
             body: children,
           );
