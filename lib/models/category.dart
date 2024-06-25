@@ -21,33 +21,29 @@ class Category {
     required this.updatedAt,
   });
 
-  factory Category.fromJson(Map<String, dynamic> json) {
-    return Category(
-      id: json['id'],
-      parentId: json['parent']?.toString(),
-      name: json['name'],
-      icon: json['icon'],
-      description: json['description'],
-      status: json['status'],
-      color: json['color'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
-    );
-  }
+  factory Category.fromJson(Map<String, dynamic> json) => Category(
+        id: json['id'],
+        parentId: json['parent']?.toString(),
+        name: json['name'],
+        icon: json['icon'],
+        description: json['description'],
+        status: json['status'],
+        color: json['color'],
+        createdAt: DateTime.parse(json['created_at']),
+        updatedAt: DateTime.parse(json['updated_at']),
+      );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'parent': parentId,
-      'name': name,
-      'icon': icon,
-      'description': description,
-      'status': status,
-      'color': color,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'parent': parentId,
+        'name': name,
+        'icon': icon,
+        'description': description,
+        'status': status,
+        'color': color,
+        'created_at': createdAt.toIso8601String(),
+        'updated_at': updatedAt.toIso8601String(),
+      };
 
   @override
   String toString() {
