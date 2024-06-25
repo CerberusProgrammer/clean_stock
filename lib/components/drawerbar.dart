@@ -6,37 +6,37 @@ const appRoutes = [
   {
     "title": "Home",
     "icon": Icons.home,
-    "secondaryIcon": Icons.arrow_forward_ios,
+    "secondaryIcon": Icons.home_outlined,
     "route": "/",
   },
   {
     "title": "Products",
     "icon": Icons.shopping_bag,
-    "secondaryIcon": Icons.arrow_forward_ios,
+    "secondaryIcon": Icons.shopping_bag_outlined,
     "route": "/products",
   },
   {
     "title": "Categories",
     "icon": Icons.category,
-    "secondaryIcon": Icons.arrow_forward_ios,
+    "secondaryIcon": Icons.category_outlined,
     "route": "/categories",
   },
   {
     "title": "Orders",
     "icon": Icons.shopping_cart,
-    "secondaryIcon": Icons.arrow_forward_ios,
+    "secondaryIcon": Icons.shopping_cart_outlined,
     "route": "/orders",
   },
   {
     "title": "Users",
     "icon": Icons.person,
-    "secondaryIcon": Icons.arrow_forward_ios,
+    "secondaryIcon": Icons.person_outline,
     "route": "/users",
   },
   {
     "title": "Settings",
     "icon": Icons.settings,
-    "secondaryIcon": Icons.arrow_forward_ios,
+    "secondaryIcon": Icons.settings_outlined,
     "route": "/settings",
   }
 ];
@@ -49,7 +49,7 @@ class Drawerbar extends StatefulWidget {
 }
 
 class _DrawerbarState extends State<Drawerbar> {
-  final index = 0;
+  var route = 'Home';
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +59,15 @@ class _DrawerbarState extends State<Drawerbar> {
         shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
         child: ListView(
           children: appRoutes.asMap().entries.map((entry) {
-            final routeInfo = entry.value; // Access the map via value
+            final routeInfo = entry.value;
             return Drawerbutton(
               title: routeInfo['title'] as String,
               icon: routeInfo['icon'] as IconData,
               secondaryIcon: routeInfo['secondaryIcon'] as IconData,
-              isSelected: currentRoute == routeInfo['route'],
-              onTap: () {},
+              isSelected: route == routeInfo['title'],
+              onTap: () => setState(() {
+                route = routeInfo['title'] as String;
+              }),
             );
           }).toList(),
         ),
