@@ -54,7 +54,7 @@ class Product {
         name: json['name'],
         description: json['description'],
         barcode: json['barcode'],
-        weight: json['weight'],
+        weight: json['weight']?.toDouble(),
         dimension: json['dimension'],
         expirationDate: json['expiration_date'] != null
             ? DateTime.parse(json['expiration_date'])
