@@ -5,7 +5,7 @@ import 'package:clean_stock/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class ProductAPI {
-  Future<List<Product>> getProducts({required String token}) async {
+  static Future<List<Product>> getProducts({required String token}) async {
     const url = domainProduct;
     final headers = {
       'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ class ProductAPI {
     }
   }
 
-  Future<Product> getProduct({
+  static Future<Product> getProduct({
     required String id,
     required String token,
   }) async {
@@ -55,7 +55,7 @@ class ProductAPI {
     }
   }
 
-  Future<Product> createProduct({
+  static Future<Product> createProduct({
     required Product product,
     required String token,
   }) async {
@@ -85,7 +85,7 @@ class ProductAPI {
     }
   }
 
-  Future<Product> updateProduct({
+  static Future<Product> updateProduct({
     required Product product,
     required String token,
   }) async {
@@ -115,7 +115,7 @@ class ProductAPI {
     }
   }
 
-  Future<void> deleteProduct({
+  static Future<void> deleteProduct({
     required String id,
     required String token,
   }) async {
@@ -136,7 +136,7 @@ class ProductAPI {
     }
   }
 
-  Future<List<Product>> getProductsByCategory({
+  static Future<List<Product>> getProductsByCategory({
     required String categoryId,
     required String token,
   }) async {
