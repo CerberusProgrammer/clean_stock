@@ -1,5 +1,5 @@
-import 'package:clean_stock/api/promotion.api.dart';
-import 'package:clean_stock/models/promotion.dart';
+import 'package:clean_stock/promotions/promotion.api.dart';
+import 'package:clean_stock/promotions/promotion.dart';
 
 class PromotionService {
   static Future<List<Promotion>> getPromotions({

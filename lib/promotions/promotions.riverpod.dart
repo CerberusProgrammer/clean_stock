@@ -1,6 +1,6 @@
-import 'package:clean_stock/models/promotion.dart';
+import 'package:clean_stock/promotions/promotion.dart';
 import 'package:clean_stock/providers/user.riverpod.dart';
-import 'package:clean_stock/services/promotion.service.dart';
+import 'package:clean_stock/promotions/promotion.service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final promotionsProvider = FutureProvider<List<Promotion>>(

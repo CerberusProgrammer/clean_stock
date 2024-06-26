@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:clean_stock/core/domain/domain.dart';
-import 'package:clean_stock/models/promotion.dart';
+import 'package:clean_stock/promotions/promotion.dart';
 import 'package:http/http.dart' as http;
 
 class PromotionAPI {
