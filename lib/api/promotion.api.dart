@@ -8,7 +8,7 @@ class PromotionAPI {
     var url = domainPromotion;
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Token $token',
     };
 
     try {
@@ -35,7 +35,7 @@ class PromotionAPI {
     final url = '$domainPromotion/$id';
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Token $token',
     };
 
     try {
@@ -61,7 +61,7 @@ class PromotionAPI {
     var url = domainPromotion;
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Token $token',
     };
 
     try {
@@ -91,7 +91,7 @@ class PromotionAPI {
     final url = '$domainPromotion/${promotion.id}';
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Token $token',
     };
 
     try {
@@ -121,7 +121,7 @@ class PromotionAPI {
     final url = '$domainPromotion/$id';
     var headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
+      'Authorization': 'Token $token',
     };
 
     try {
