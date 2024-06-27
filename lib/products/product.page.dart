@@ -1,4 +1,5 @@
 import 'package:clean_stock/components/custom_textbutton.dart';
+import 'package:clean_stock/products/product.sort.page.dart';
 import 'package:clean_stock/utils/showfade_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -62,8 +63,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                         onTap: () => showFadeDialog(
                           title: 'Sort by',
                           context: context,
-                          child: const Text(
-                              'Contenido del diálogo de pantalla completa'),
+                          child: const ProductSortPage(),
                         ),
                       ),
                     )
