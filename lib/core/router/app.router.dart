@@ -2,6 +2,7 @@ import 'package:clean_stock/pages/home.page.dart';
 import 'package:clean_stock/pages/profile.page.dart';
 import 'package:clean_stock/pages/settings.page.dart';
 import 'package:clean_stock/products/product.page.dart';
+import 'package:clean_stock/products/product.view.page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,7 +18,19 @@ final appRouter = GoRouter(
         path: '/products',
         name: 'products',
         pageBuilder: (context, state) =>
-            const NoTransitionPage(child: ProductPage())),
+            const NoTransitionPage(child: ProductPage()),
+        routes: [
+          GoRoute(
+            path: ':id',
+            pageBuilder: (context, state) {
+              final productId = state.pathParameters['id'];
+
+              return NoTransitionPage(
+                child: ProductViewPage(productId: productId),
+              );
+            },
+          ),
+        ]),
     GoRoute(
         path: '/settings',
         name: 'settings',
