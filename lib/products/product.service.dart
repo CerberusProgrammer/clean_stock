@@ -1,11 +1,16 @@
 import 'package:clean_stock/products/product.api.dart';
 import 'package:clean_stock/products/product.dart';
+import 'package:clean_stock/products/product.query.dart';
 
 class ProductService {
   static Future<List<Product>> getProducts({
     required String token,
+    ProductQueryParams? queryParams,
   }) async =>
-      await ProductAPI.getProducts(token: token);
+      await ProductAPI.getProducts(
+        token: token,
+        queryParams: queryParams ?? ProductQueryParams(),
+      );
 
   static Future<Product> getProduct({
     required String id,
