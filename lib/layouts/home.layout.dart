@@ -5,10 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeLayout extends StatelessWidget {
-  const HomeLayout({super.key, required this.children, this.floatingButton});
+  const HomeLayout(
+      {super.key, required this.children, this.floatingButton, this.appBar});
 
   final Widget children;
   final Widget? floatingButton;
+  final AppBar? appBar;
 
   @override
   Widget build(BuildContext context) {
@@ -24,18 +26,19 @@ class HomeLayout extends StatelessWidget {
                 Expanded(
                   flex: 5,
                   child: Scaffold(
-                    appBar: PreferredSize(
-                      preferredSize: const Size(double.infinity, 56),
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Breadcrumbs(
-                          currentPath: GoRouter.of(context)
-                              .routerDelegate
-                              .currentConfiguration
-                              .fullPath,
+                    appBar: appBar ??
+                        PreferredSize(
+                          preferredSize: const Size(double.infinity, 56),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Breadcrumbs(
+                              currentPath: GoRouter.of(context)
+                                  .routerDelegate
+                                  .currentConfiguration
+                                  .fullPath,
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
                     body: Column(
                       children: [children],
                     ),
@@ -47,14 +50,15 @@ class HomeLayout extends StatelessWidget {
           );
         } else {
           return Scaffold(
-            appBar: AppBar(
-              title: Text(formatPath(
-                GoRouter.of(context)
-                    .routerDelegate
-                    .currentConfiguration
-                    .fullPath,
-              )),
-            ),
+            appBar: appBar ??
+                AppBar(
+                  title: Text(formatPath(
+                    GoRouter.of(context)
+                        .routerDelegate
+                        .currentConfiguration
+                        .fullPath,
+                  )),
+                ),
             drawer: const Drawerbar(),
             body: ListView(children: [children]),
             floatingActionButton: floatingButton,
