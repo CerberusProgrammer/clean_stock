@@ -15,9 +15,14 @@ class ProductViewPage extends ConsumerWidget {
 
       return HomeLayout(
         children: product.when(
-          data: (data) {
-            return Text(data.name);
-          },
+          data: (data) => ListView(
+            children: [
+              Text('Product ID: ${data.id}'),
+              Text('Product Name: ${data.name}'),
+              Text('Product Price: ${data.price}'),
+              Text('Product Description: ${data.description}'),
+            ],
+          ),
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
