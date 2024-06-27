@@ -2,18 +2,63 @@ import 'dart:convert';
 
 import 'package:clean_stock/core/domain/domain.dart';
 import 'package:clean_stock/products/product.dart';
+import 'package:clean_stock/products/product.query.dart';
 import 'package:http/http.dart' as http;
 
 class ProductAPI {
-  static Future<List<Product>> getProducts({required String token}) async {
-    const url = domainProduct;
+  static Future<List<Product>> getProducts({
+    required String token,
+    required ProductQueryParams queryParams,
+  }) async {
+    var params = <String, String>{};
+
+    if (queryParams.name != null) params['name'] = queryParams.name!;
+    if (queryParams.description != null) {
+      params['description'] = queryParams.description!;
+    }
+    if (queryParams.barcode != null) params['barcode'] = queryParams.barcode!;
+    if (queryParams.weight != null) {
+      params['weight'] = queryParams.weight.toString();
+    }
+    if (queryParams.dimension != null) {
+      params['dimension'] = queryParams.dimension!;
+    }
+    if (queryParams.expirationDate != null) {
+      params['expiration_date'] = queryParams.expirationDate!;
+    }
+    if (queryParams.location != null) {
+      params['location'] = queryParams.location!;
+    }
+    if (queryParams.manufacturer != null) {
+      params['manufacturer'] = queryParams.manufacturer!;
+    }
+    if (queryParams.supplier != null) {
+      params['supplier'] = queryParams.supplier!;
+    }
+    if (queryParams.status != null) {
+      params['status'] = queryParams.status.toString();
+    }
+    if (queryParams.price != null) {
+      params['price'] = queryParams.price.toString();
+    }
+    if (queryParams.quantity != null) {
+      params['quantity'] = queryParams.quantity.toString();
+    }
+    if (queryParams.category != null) {
+      params['category'] = queryParams.category!;
+    }
+    if (queryParams.createdAt != null) {
+      params['created_at'] = queryParams.createdAt!;
+    }
+
+    final uri = Uri.parse(domainProduct).replace(queryParameters: params);
     final headers = {
       'Content-Type': 'application/json',
       'Authorization': 'Token $token',
     };
 
     try {
-      final response = await http.get(Uri.parse(url), headers: headers);
+      final response = await http.get(uri, headers: headers);
 
       if (response.statusCode == 200) {
         final List<dynamic> productJsonList = json.decode(response.body);
