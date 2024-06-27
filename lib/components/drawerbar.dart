@@ -1,21 +1,7 @@
 import 'package:clean_stock/components/drawerbutton.dart';
+import 'package:clean_stock/core/router/app.router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
-const appRoutes = [
-  {
-    "title": "Home",
-    "icon": Icons.home,
-    "secondaryIcon": Icons.home_outlined,
-    "route": "/",
-  },
-  {
-    "title": "Settings",
-    "icon": Icons.settings,
-    "secondaryIcon": Icons.settings_outlined,
-    "route": "/settings",
-  }
-];
 
 class Drawerbar extends StatefulWidget {
   const Drawerbar({super.key});
