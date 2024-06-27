@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeLayout extends StatelessWidget {
-  const HomeLayout({super.key, required this.children});
+  const HomeLayout({super.key, required this.children, this.floatingButton});
 
   final Widget children;
+  final Widget? floatingButton;
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class HomeLayout extends StatelessWidget {
                 ),
               ],
             ),
+            floatingActionButton: floatingButton,
           );
         } else {
           return Scaffold(
@@ -54,7 +56,8 @@ class HomeLayout extends StatelessWidget {
               )),
             ),
             drawer: const Drawerbar(),
-            body: children,
+            body: ListView(children: [children]),
+            floatingActionButton: floatingButton,
           );
         }
       },
