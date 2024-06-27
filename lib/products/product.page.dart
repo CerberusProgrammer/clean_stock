@@ -1,3 +1,5 @@
+import 'package:clean_stock/components/custom_textbutton.dart';
+import 'package:clean_stock/utils/showfade_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:clean_stock/layouts/home.layout.dart';
@@ -42,20 +44,27 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                 ),
                 Row(
                   children: [
-                    DropdownMenu(
-                      label: const Text('Category'),
-                      enableSearch: true,
-                      requestFocusOnTap: true,
-                      dropdownMenuEntries: const [
-                        DropdownMenuEntry(
-                            value: 'electronico', label: 'electronico'),
-                        DropdownMenuEntry(value: 'ropa', label: 'ropa'),
-                        DropdownMenuEntry(value: 'comida', label: 'comida'),
-                      ],
-                      inputDecorationTheme: InputDecorationTheme(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(0),
-                            borderSide: BorderSide.none),
+                    Expanded(
+                      child: CustomTextButton(
+                        title: 'Order by',
+                        icon: Icons.arrow_downward,
+                        onTap: () => showFadeDialog(
+                          title: 'Order by',
+                          context: context,
+                          child: const Text('asd'),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: CustomTextButton(
+                        title: 'Sort by',
+                        icon: Icons.sort,
+                        onTap: () => showFadeDialog(
+                          title: 'Sort by',
+                          context: context,
+                          child: const Text(
+                              'Contenido del diálogo de pantalla completa'),
+                        ),
                       ),
                     )
                   ],
