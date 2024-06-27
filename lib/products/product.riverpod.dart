@@ -1,5 +1,6 @@
 import 'package:clean_stock/models/Category.dart';
 import 'package:clean_stock/products/product.dart';
+import 'package:clean_stock/products/product.query.dart';
 import 'package:clean_stock/providers/user.riverpod.dart';
 import 'package:clean_stock/products/product.service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -73,9 +74,11 @@ final testProductsProvider = FutureProvider<List<Product>>(
   ],
 );
 
-final productsProvider = FutureProvider<List<Product>>(
-  (ref) async => ProductService.getProducts(
+final productsProvider =
+    FutureProvider.family<List<Product>, ProductQueryParams>(
+  (ref, query) async => ProductService.getProducts(
     token: ref.watch(userProvider).token,
+    queryParams: query,
   ),
 );
 
