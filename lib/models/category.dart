@@ -45,6 +45,18 @@ class Category {
         'updated_at': updatedAt.toIso8601String(),
       };
 
+  Map<String, dynamic> toJsonForSQL() => {
+        'id': id,
+        'parent_id': parentId,
+        'name': name,
+        'icon': icon,
+        'description': description,
+        'status': status ? 1 : 0,
+        'color': color,
+        'created_at': createdAt.toIso8601String(),
+        'updated_at': updatedAt.toIso8601String(),
+      };
+
   @override
   String toString() {
     return 'Category{id: $id, parentId: $parentId, name: $name, icon: $icon, description: $description, status: $status, color: $color, createdAt: $createdAt, updatedAt: $updatedAt}';
