@@ -65,6 +65,23 @@ class Manufacturer {
         'updated_at': updatedAt.toIso8601String(),
       };
 
+  Map<String, dynamic> toJsonForSQL() => {
+        'id': id,
+        'name': name,
+        'icon': icon,
+        'description': description,
+        'address': address,
+        'website': website,
+        'contact_email': contactEmail,
+        'contact_phone': contactPhone,
+        'country': country,
+        'city': city,
+        'status': status ? 1 : 0,
+        'color': color,
+        'created_at': createdAt.toIso8601String(),
+        'updated_at': updatedAt.toIso8601String(),
+      };
+
   @override
   String toString() {
     return 'Manufacturer{id: $id, name: $name, icon: $icon, description: $description, address: $address, website: $website, contactEmail: $contactEmail, contactPhone: $contactPhone, country: $country, city: $city, status: $status, color: $color, createdAt: $createdAt, updatedAt: $updatedAt}';
