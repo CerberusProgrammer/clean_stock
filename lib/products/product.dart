@@ -105,6 +105,30 @@ class Product {
         'updated_at': updatedAt.toIso8601String(),
       };
 
+  Map<String, dynamic> toJsonForSQL() => {
+        'id': id,
+        'name': name,
+        'description': description,
+        'barcode': barcode,
+        'weight': weight,
+        'dimension': dimension,
+        'expiration_date': expirationDate?.toIso8601String(),
+        'location': location,
+        'manufacturer': manufacturer?.toJson(),
+        'supplier': supplier?.toJson(),
+        'icon': icon,
+        'image': image,
+        'status': status ? 1 : 0,
+        'price': price,
+        'quantity': quantity,
+        'quantity_min': quantityMin,
+        'quantity_max': quantityMax,
+        'color': color,
+        'category': category?.toJson(),
+        'created_at': createdAt.toIso8601String(),
+        'updated_at': updatedAt.toIso8601String(),
+      };
+
   copyWith({
     int? id,
     String? name,
