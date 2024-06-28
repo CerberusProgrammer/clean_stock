@@ -105,6 +105,54 @@ class Product {
         'updated_at': updatedAt.toIso8601String(),
       };
 
+  copyWith({
+    int? id,
+    String? name,
+    String? description,
+    String? barcode,
+    double? weight,
+    String? dimension,
+    DateTime? expirationDate,
+    String? location,
+    Manufacturer? manufacturer,
+    Supplier? supplier,
+    String? icon,
+    String? image,
+    bool? status,
+    double? price,
+    int? quantity,
+    int? quantityMin,
+    int? quantityMax,
+    String? color,
+    Category? category,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return Product(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      barcode: barcode ?? this.barcode,
+      weight: weight ?? this.weight,
+      dimension: dimension ?? this.dimension,
+      expirationDate: expirationDate ?? this.expirationDate,
+      location: location ?? this.location,
+      manufacturer: manufacturer ?? this.manufacturer,
+      supplier: supplier ?? this.supplier,
+      icon: icon ?? this.icon,
+      image: image ?? this.image,
+      status: status ?? this.status,
+      price: price ?? this.price,
+      quantity: quantity ?? this.quantity,
+      quantityMin: quantityMin ?? this.quantityMin,
+      quantityMax: quantityMax ?? this.quantityMax,
+      color: color ?? this.color,
+      category: category ?? this.category,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
   @override
   String toString() {
     return 'Product{id: $id, name: $name, description: $description, barcode: $barcode, weight: $weight, dimension: $dimension, expirationDate: ${expirationDate?.toIso8601String()}, location: $location, manufacturer: $manufacturer, supplier: $supplier, icon: $icon, image: $image, status: $status, price: $price, quantity: $quantity, quantityMin: $quantityMin, quantityMax: $quantityMax, color: $color, category: $category, createdAt: $createdAt, updatedAt: $updatedAt}';
