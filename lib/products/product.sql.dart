@@ -41,7 +41,7 @@ class ProductSQL {
         await db.rawQuery(sql, arguments);
 
     List<Product> products =
-        queryResult.map((e) => Product.fromJson(e)).toList();
+        queryResult.map((e) => Product.fromSQL(e)).toList();
 
     return products;
   }
@@ -51,7 +51,7 @@ class ProductSQL {
   }) async {
     final Database db = await initializeDB();
 
-    final Map<String, dynamic> productMap = product.toJson();
+    final Map<String, dynamic> productMap = product.toJsonForSQL();
     final int id = await db.insert(
       'products',
       productMap,
@@ -66,7 +66,7 @@ class ProductSQL {
   }) async {
     final Database db = await initializeDB();
 
-    final Map<String, dynamic> productMap = product.toJson();
+    final Map<String, dynamic> productMap = product.toJsonForSQL();
 
     await db.update(
       'products',
