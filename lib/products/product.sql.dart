@@ -1,18 +1,15 @@
 import 'package:clean_stock/core/domain/db/data_sql.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 import 'package:clean_stock/products/product.dart';
 import 'package:clean_stock/products/product.query.dart';
 
 class ProductSQL {
   static Future<List<Product>> getProducts({
-    required String token,
     required ProductQueryParams queryParams,
   }) async {
-    final dbPath = await getDatabasesPath();
-    final db = await openDatabase(join(dbPath, database));
+    final Database db = await initializeDB();
 
-    String sql = 'SELECT * FROM $databaseTableProducts WHERE 1=1';
+    String sql = 'SELECT * FROM products WHERE 1=1';
     List<dynamic> arguments = [];
 
     if (queryParams.name != null) {
@@ -39,98 +36,57 @@ class ProductSQL {
       sql += ' AND expiration_date = ?';
       arguments.add(queryParams.expirationDate);
     }
-    if (queryParams.location != null) {
-      sql += ' AND location = ?';
-      arguments.add(queryParams.location);
-    }
-    if (queryParams.manufacturer != null) {
-      sql += ' AND manufacturer = ?';
-      arguments.add(queryParams.manufacturer);
-    }
-    if (queryParams.supplier != null) {
-      sql += ' AND supplier = ?';
-      arguments.add(queryParams.supplier);
-    }
-    if (queryParams.status != null) {
-      sql += ' AND status = ?';
-      arguments.add(queryParams.status);
-    }
-    if (queryParams.price != null) {
-      sql += ' AND price = ?';
-      arguments.add(queryParams.price);
-    }
-    if (queryParams.quantity != null) {
-      sql += ' AND quantity = ?';
-      arguments.add(queryParams.quantity);
-    }
-    if (queryParams.category != null) {
-      sql += ' AND category = ?';
-      arguments.add(queryParams.category);
-    }
-    if (queryParams.createdAt != null) {
-      sql += ' AND created_at = ?';
-      arguments.add(queryParams.createdAt);
-    }
 
     final List<Map<String, dynamic>> queryResult =
         await db.rawQuery(sql, arguments);
 
-    await db.close();
+    List<Product> products =
+        queryResult.map((e) => Product.fromJson(e)).toList();
 
-    return queryResult.map((e) => Product.fromJson(e)).toList();
+    return products;
   }
 
   static Future<Product> createProduct({
-    required String token,
     required Product product,
   }) async {
-    final dbPath = await getDatabasesPath();
-    final db = await openDatabase(join(dbPath, database));
+    final Database db = await initializeDB();
 
     final Map<String, dynamic> productMap = product.toJson();
-    productMap.remove('id');
-
-    final int id = await db.insert(databaseTableProducts, productMap);
-
-    await db.close();
+    final int id = await db.insert(
+      'products',
+      productMap,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
 
     return product.copyWith(id: id);
   }
 
   static Future<Product> updateProduct({
-    required String token,
     required Product product,
   }) async {
-    final dbPath = await getDatabasesPath();
-    final db = await openDatabase(join(dbPath, database));
+    final Database db = await initializeDB();
 
     final Map<String, dynamic> productMap = product.toJson();
 
     await db.update(
-      databaseTableProducts,
+      'products',
       productMap,
       where: 'id = ?',
       whereArgs: [product.id],
     );
 
-    await db.close();
-
     return product;
   }
 
   static Future<void> deleteProduct({
-    required String token,
     required Product product,
   }) async {
-    final dbPath = await getDatabasesPath();
-    final db = await openDatabase(join(dbPath, database));
+    final Database db = await initializeDB();
 
     await db.delete(
-      databaseTableProducts,
+      'products',
       where: 'id = ?',
       whereArgs: [product.id],
     );
-
-    await db.close();
   }
 }
