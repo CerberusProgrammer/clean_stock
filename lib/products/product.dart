@@ -12,7 +12,9 @@ class Product {
   final DateTime? expirationDate;
   final String? location;
   final Manufacturer? manufacturer;
+  final int? manufacturerId;
   final Supplier? supplier;
+  final int? supplierId;
   final String? icon;
   final String? image;
   final bool status;
@@ -22,6 +24,7 @@ class Product {
   final int? quantityMax;
   final String? color;
   final Category? category;
+  final int? categoryId;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -47,6 +50,9 @@ class Product {
     this.category,
     required this.createdAt,
     required this.updatedAt,
+    this.manufacturerId,
+    this.supplierId,
+    this.categoryId,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) => Product(
@@ -63,9 +69,11 @@ class Product {
         manufacturer: json['manufacturer'] != null
             ? Manufacturer.fromJson(json['manufacturer'])
             : null,
+        manufacturerId: json['manufacturer_id'],
         supplier: json['supplier'] != null
             ? Supplier.fromJson(json['supplier'])
             : null,
+        supplierId: json['supplier_id'],
         icon: json['icon'],
         image: json['image'],
         status: json['status'],
@@ -77,8 +85,35 @@ class Product {
         category: json['category'] != null
             ? Category.fromJson(json['category'])
             : null,
+        categoryId: json['category_id'],
         createdAt: DateTime.parse(json['created_at']),
         updatedAt: DateTime.parse(json['updated_at']),
+      );
+
+  factory Product.fromSQL(Map<String, dynamic> sql) => Product(
+        id: sql['id'],
+        name: sql['name'],
+        description: sql['description'],
+        barcode: sql['barcode'],
+        weight: sql['weight']?.toDouble(),
+        dimension: sql['dimension'],
+        expirationDate: sql['expiration_date'] != null
+            ? DateTime.parse(sql['expiration_date'])
+            : null,
+        location: sql['location'],
+        manufacturerId: sql['manufacturer_id'],
+        supplierId: sql['supplier_id'],
+        icon: sql['icon'],
+        image: sql['image'],
+        status: sql['status'] == 1,
+        price: sql['price'],
+        quantity: sql['quantity'],
+        quantityMin: sql['quantity_min'],
+        quantityMax: sql['quantity_max'],
+        color: sql['color'],
+        categoryId: sql['category_id'],
+        createdAt: DateTime.parse(sql['created_at']),
+        updatedAt: DateTime.parse(sql['updated_at']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -139,7 +174,9 @@ class Product {
     DateTime? expirationDate,
     String? location,
     Manufacturer? manufacturer,
+    int? manufacturerId,
     Supplier? supplier,
+    int? supplierId,
     String? icon,
     String? image,
     bool? status,
@@ -149,6 +186,7 @@ class Product {
     int? quantityMax,
     String? color,
     Category? category,
+    int? categoryId,
     DateTime? createdAt,
     DateTime? updatedAt,
   }) {
@@ -162,7 +200,9 @@ class Product {
       expirationDate: expirationDate ?? this.expirationDate,
       location: location ?? this.location,
       manufacturer: manufacturer ?? this.manufacturer,
+      manufacturerId: manufacturerId ?? this.manufacturerId,
       supplier: supplier ?? this.supplier,
+      supplierId: supplierId ?? this.supplierId,
       icon: icon ?? this.icon,
       image: image ?? this.image,
       status: status ?? this.status,
@@ -172,6 +212,7 @@ class Product {
       quantityMax: quantityMax ?? this.quantityMax,
       color: color ?? this.color,
       category: category ?? this.category,
+      categoryId: categoryId ?? this.categoryId,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
     );
@@ -179,6 +220,6 @@ class Product {
 
   @override
   String toString() {
-    return 'Product{id: $id, name: $name, description: $description, barcode: $barcode, weight: $weight, dimension: $dimension, expirationDate: ${expirationDate?.toIso8601String()}, location: $location, manufacturer: $manufacturer, supplier: $supplier, icon: $icon, image: $image, status: $status, price: $price, quantity: $quantity, quantityMin: $quantityMin, quantityMax: $quantityMax, color: $color, category: $category, createdAt: $createdAt, updatedAt: $updatedAt}';
+    return 'Product{id: $id, name: $name, description: $description, barcode: $barcode, weight: $weight, dimension: $dimension, expirationDate: ${expirationDate?.toIso8601String()}, location: $location, manufacturer: $manufacturer, manufacturer_id: $manufacturerId, supplier: $supplier, supplier_id: $supplierId icon: $icon, image: $image, status: $status, price: $price, quantity: $quantity, quantityMin: $quantityMin, quantityMax: $quantityMax, color: $color, category: $category, category_id: $category, createdAt: $createdAt, updatedAt: $updatedAt}';
   }
 }
