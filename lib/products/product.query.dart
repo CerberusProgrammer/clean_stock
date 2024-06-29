@@ -6,12 +6,12 @@ class ProductQueryParams {
   final String? dimension;
   final String? expirationDate;
   final String? location;
-  final String? manufacturer;
-  final String? supplier;
+  final int? manufacturer;
+  final int? supplier;
   final bool? status;
   final num? price;
   final num? quantity;
-  final String? category;
+  final int? category;
   final String? createdAt;
 
   ProductQueryParams({
