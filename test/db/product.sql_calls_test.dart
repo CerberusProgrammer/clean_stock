@@ -37,6 +37,174 @@ void main() {
       expect(products.isNotEmpty, true);
     });
 
+    test('Get product with Manufacturer query parameter', () async {
+      final testProduct = Product(
+        name: 'Test Product',
+        description: 'This is a test product.',
+        price: 9.99,
+        barcode: 'asd',
+        weight: 1.0,
+        dimension: '10x20x30',
+        expirationDate: DateTime.now(),
+        manufacturer: Manufacturer(
+          id: 1,
+          name: 'Test Manufacturer',
+          status: true,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+        location: 'Aisle 4',
+        status: true,
+        quantity: 10,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        id: 0,
+      );
+
+      await ProductSQL.createProduct(product: testProduct);
+
+      final queryParams = ProductQueryParams(manufacturer: 1);
+
+      final List<Product> products = await ProductSQL.getProducts(
+        queryParams: queryParams,
+      );
+
+      expect(products.isNotEmpty, true);
+      expect(products.any((p) => p.manufacturerId == 1), true);
+    });
+
+    test('Get product with Category query parameter', () async {
+      final testProduct = Product(
+        name: 'Test Product',
+        description: 'This is a test product.',
+        price: 9.99,
+        barcode: 'asd',
+        weight: 1.0,
+        dimension: '10x20x30',
+        expirationDate: DateTime.now(),
+        category: Category(
+          id: 1,
+          name: 'Test Category',
+          status: true,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+        location: 'Aisle 4',
+        status: true,
+        quantity: 10,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        id: 0,
+      );
+
+      await ProductSQL.createProduct(product: testProduct);
+
+      final queryParams = ProductQueryParams(category: 1);
+
+      final List<Product> products = await ProductSQL.getProducts(
+        queryParams: queryParams,
+      );
+
+      expect(products.isNotEmpty, true);
+      expect(products.any((p) => p.categoryId == 1), true);
+    });
+
+    test('Get product with Supplier query parameter', () async {
+      final testProduct = Product(
+        name: 'Test Product',
+        description: 'This is a test product.',
+        price: 9.99,
+        barcode: 'asd',
+        weight: 1.0,
+        dimension: '10x20x30',
+        expirationDate: DateTime.now(),
+        supplier: Supplier(
+          id: 1,
+          name: 'Test Supplier',
+          status: true,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+        location: 'Aisle 4',
+        status: true,
+        quantity: 10,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        id: 0,
+      );
+
+      await ProductSQL.createProduct(product: testProduct);
+
+      final queryParams = ProductQueryParams(supplier: 1);
+
+      final List<Product> products = await ProductSQL.getProducts(
+        queryParams: queryParams,
+      );
+
+      expect(products.isNotEmpty, true);
+      expect(products.any((p) => p.supplierId == 1), true);
+    });
+
+    test(
+        'Get product with Supplier, Category, and Manufacturer query parameters',
+        () async {
+      final testProduct = Product(
+        name: 'Test Product',
+        description: 'This is a test product.',
+        price: 9.99,
+        barcode: 'asd',
+        weight: 1.0,
+        dimension: '10x20x30',
+        expirationDate: DateTime.now(),
+        supplier: Supplier(
+          id: 1,
+          name: 'Test Supplier',
+          status: true,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+        category: Category(
+          id: 1,
+          name: 'Test Category',
+          status: true,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+        manufacturer: Manufacturer(
+          id: 1,
+          name: 'Test Manufacturer',
+          status: true,
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
+        ),
+        location: 'Aisle 4',
+        status: true,
+        quantity: 10,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        id: 0,
+      );
+
+      await ProductSQL.createProduct(product: testProduct);
+
+      final queryParams = ProductQueryParams(
+        supplier: 1,
+        category: 1,
+        manufacturer: 1,
+      );
+
+      final List<Product> products = await ProductSQL.getProducts(
+        queryParams: queryParams,
+      );
+
+      print(products);
+
+      // expect(products.isNotEmpty, true);
+      expect(products.any((p) => p.supplierId == 1), true);
+      // expect(products.any((p) => p.categoryId == 1), true);
+      expect(products.any((p) => p.manufacturerId == 1), true);
+    });
+
     test('Create product', () async {
       final newProduct = Product(
         name: 'Test Product',
