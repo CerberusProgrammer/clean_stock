@@ -104,8 +104,6 @@ void main() {
       final List<Product> products = await ProductSQL.getProducts(
         queryParams: queryParams,
       );
-      print(products);
-      // NOT CORRECTLY APPLIED
 
       expect(products.isNotEmpty, true);
       expect(products.any((p) => p.categoryId == 1), true);
