@@ -30,10 +30,10 @@ class ProductAPI {
       params['location'] = queryParams.location!;
     }
     if (queryParams.manufacturer != null) {
-      params['manufacturer'] = queryParams.manufacturer!;
+      params['manufacturer'] = queryParams.manufacturer! as String;
     }
     if (queryParams.supplier != null) {
-      params['supplier'] = queryParams.supplier!;
+      params['supplier'] = queryParams.supplier! as String;
     }
     if (queryParams.status != null) {
       params['status'] = queryParams.status.toString();
@@ -45,7 +45,7 @@ class ProductAPI {
       params['quantity'] = queryParams.quantity.toString();
     }
     if (queryParams.category != null) {
-      params['category'] = queryParams.category!;
+      params['category'] = queryParams.category! as String;
     }
     if (queryParams.createdAt != null) {
       params['created_at'] = queryParams.createdAt!;
