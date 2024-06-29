@@ -24,6 +24,11 @@ class _ProductPageState extends ConsumerState<ProductPage> {
     return HomeLayout(
         floatingButton: FloatingActionButton(
           elevation: 0,
+          focusElevation: 0,
+          hoverElevation: 0,
+          disabledElevation: 0,
+          enableFeedback: true,
+          highlightElevation: 0,
           onPressed: () {},
           child: const Icon(Icons.add),
         ),
