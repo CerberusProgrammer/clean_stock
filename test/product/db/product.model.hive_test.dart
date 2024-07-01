@@ -1,7 +1,7 @@
 import 'package:clean_stock/models/category.model.hive.dart';
 import 'package:clean_stock/models/manufacturer.model.hive.dart';
 import 'package:clean_stock/models/supplier.model.hive.dart';
-import 'package:clean_stock/products/product.model.hive.dart';
+import 'package:clean_stock/products/db/product.model.hive.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

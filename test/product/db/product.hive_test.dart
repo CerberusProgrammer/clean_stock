@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:clean_stock/products/product.model.hive.dart';
-import 'package:clean_stock/products/product.hive.dart';
+import 'package:clean_stock/products/db/product.model.hive.dart';
+import 'package:clean_stock/products/db/product.hive.dart';
 import 'package:hive/hive.dart';
 
 void main() {

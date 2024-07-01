@@ -1,4 +1,4 @@
-import 'package:clean_stock/products/product.model.hive.dart';
+import 'package:clean_stock/products/db/product.model.hive.dart';
 import 'package:hive/hive.dart';
 
 class ProductHive {
