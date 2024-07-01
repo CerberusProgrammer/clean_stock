@@ -60,4 +60,47 @@ class Supplier extends HiveObject {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  factory Supplier.fromJson(Map<String, dynamic> json) {
+    return Supplier(
+      id: json['id'],
+      name: json['name'],
+      icon: json['icon'],
+      description: json['description'],
+      address: json['address'],
+      website: json['website'],
+      contactEmail: json['contactEmail'],
+      contactPhone: json['contactPhone'],
+      country: json['country'],
+      city: json['city'],
+      status: json['status'],
+      color: json['color'],
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'icon': icon,
+      'description': description,
+      'address': address,
+      'website': website,
+      'contactEmail': contactEmail,
+      'contactPhone': contactPhone,
+      'country': country,
+      'city': city,
+      'status': status,
+      'color': color,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Supplier(id: $id, name: $name, icon: $icon, description: $description, address: $address, website: $website, contactEmail: $contactEmail, contactPhone: $contactPhone, country: $country, city: $city, status: $status, color: $color, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
 }
