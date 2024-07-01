@@ -1,3 +1,4 @@
+import 'package:clean_stock/products/db/product.hive.dart';
 import 'package:clean_stock/products/product.api.dart';
 import 'package:clean_stock/products/product.dart';
 import 'package:clean_stock/products/product.query.dart';
@@ -7,7 +8,7 @@ class ProductService {
     required String token,
     ProductQueryParams? queryParams,
   }) async =>
-      await ProductAPI.getProducts(
+      await ProductHive.getProducts(
         token: token,
         queryParams: queryParams ?? ProductQueryParams(),
       );

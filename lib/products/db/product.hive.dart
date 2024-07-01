@@ -1,49 +1,47 @@
-import 'package:clean_stock/products/db/product.model.hive.dart';
+import 'package:clean_stock/products/product.dart';
+import 'package:clean_stock/products/product.query.dart';
 import 'package:hive/hive.dart';
 
 class ProductHive {
   static Box<Product> getProductsBox() => Hive.box<Product>('products');
 
   static Future<List<Product>> getProducts({
-    String? name,
-    String? description,
-    String? barcode,
-    double? weight,
-    String? dimension,
-    DateTime? expirationDate,
-    String? location,
-    String? manufacturer,
+    required String token,
+    required ProductQueryParams queryParams,
   }) async {
-    final box = getProductsBox();
-    final List<Product> products = box.values.toList();
+    try {
+      final box = getProductsBox();
+      final List<Product> products = box.values.toList();
 
-    return products.where((product) {
-      final isNameMatch = name != null ? product.name == name : true;
-      final isDescriptionMatch =
-          description != null ? product.description == description : true;
-      final isBarcodeMatch =
-          barcode != null ? product.barcode == barcode : true;
-      final isWeightMatch = weight != null ? product.weight == weight : true;
-      final isDimensionMatch =
-          dimension != null ? product.dimension == dimension : true;
-      final isExpirationDateMatch = expirationDate != null
-          ? product.expirationDate == expirationDate
-          : true;
-      final isLocationMatch =
-          location != null ? product.location == location : true;
-      final isManufacturerMatch = manufacturer != null
-          ? product.manufacturer?.toString() == manufacturer
-          : true;
+      return products.where((product) {
+        final isNameMatch =
+            queryParams.name != null ? product.name == queryParams.name : true;
+        final isDescriptionMatch = queryParams.description != null
+            ? product.description == queryParams.description
+            : true;
+        final isBarcodeMatch = queryParams.barcode != null
+            ? product.barcode == queryParams.barcode
+            : true;
+        final isWeightMatch = queryParams.weight != null
+            ? product.weight == queryParams.weight
+            : true;
+        final isDimensionMatch = queryParams.dimension != null
+            ? product.dimension == queryParams.dimension
+            : true;
+        final isLocationMatch = queryParams.location != null
+            ? product.location == queryParams.location
+            : true;
 
-      return isNameMatch &&
-          isDescriptionMatch &&
-          isBarcodeMatch &&
-          isWeightMatch &&
-          isDimensionMatch &&
-          isExpirationDateMatch &&
-          isLocationMatch &&
-          isManufacturerMatch;
-    }).toList();
+        return isNameMatch &&
+            isDescriptionMatch &&
+            isBarcodeMatch &&
+            isWeightMatch &&
+            isDimensionMatch &&
+            isLocationMatch;
+      }).toList();
+    } catch (e) {
+      throw Exception('Failed to get products: $e');
+    }
   }
 
   static Future<Product?> getProductById(int id) async {
