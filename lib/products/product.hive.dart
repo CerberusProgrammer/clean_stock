@@ -45,4 +45,38 @@ class ProductHive {
           isManufacturerMatch;
     }).toList();
   }
+
+  static Future<Product?> getProductById(int id) async {
+    final box = getProductsBox();
+    final product = box.values.firstWhere((product) => product.id == id);
+
+    return product;
+  }
+
+  static Future<Product> addProduct(Product product) async {
+    final box = getProductsBox();
+    final key = await box.add(product);
+    final addedProduct = box.get(key);
+
+    return addedProduct!;
+  }
+
+  static Future<Product> updateProduct(Product product) async {
+    final box = getProductsBox();
+    final key = box.keys.firstWhere((key) => box.get(key)!.id == product.id);
+    await box.put(key, product);
+
+    return product;
+  }
+
+  static Future<void> deleteProduct(int id) async {
+    final box = getProductsBox();
+    final key = box.keys.firstWhere((key) => box.get(key)!.id == id);
+    await box.delete(key);
+  }
+
+  static Future<void> deleteAllProducts() async {
+    final box = getProductsBox();
+    await box.clear();
+  }
 }
