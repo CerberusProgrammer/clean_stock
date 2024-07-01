@@ -103,4 +103,67 @@ class Product extends HiveObject {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  factory Product.fromJson(Map<String, dynamic> json) {
+    return Product(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      barcode: json['barcode'],
+      weight: json['weight'],
+      dimension: json['dimension'],
+      expirationDate: DateTime.parse(json['expirationDate']),
+      location: json['location'],
+      manufacturer: Manufacturer.fromJson(json['manufacturer']),
+      manufacturerId: json['manufacturerId'],
+      supplier: Supplier.fromJson(json['supplier']),
+      supplierId: json['supplierId'],
+      icon: json['icon'],
+      image: json['image'],
+      status: json['status'],
+      price: json['price'],
+      quantity: json['quantity'],
+      quantityMin: json['quantityMin'],
+      quantityMax: json['quantityMax'],
+      color: json['color'],
+      category: Category.fromJson(json['category']),
+      categoryId: json['categoryId'],
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'description': description,
+      'barcode': barcode,
+      'weight': weight,
+      'dimension': dimension,
+      'expirationDate': expirationDate?.toIso8601String(),
+      'location': location,
+      'manufacturer': manufacturer,
+      'manufacturerId': manufacturerId,
+      'supplier': supplier,
+      'supplierId': supplierId,
+      'icon': icon,
+      'image': image,
+      'status': status,
+      'price': price,
+      'quantity': quantity,
+      'quantityMin': quantityMin,
+      'quantityMax': quantityMax,
+      'color': color,
+      'category': category,
+      'categoryId': categoryId,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Product(id: $id, name: $name, description: $description, barcode: $barcode, weight: $weight, dimension: $dimension, expirationDate: $expirationDate, location: $location, manufacturer: $manufacturer, manufacturerId: $manufacturerId, supplier: $supplier, supplierId: $supplierId, icon: $icon, image: $image, status: $status, price: $price, quantity: $quantity, quantityMin: $quantityMin, quantityMax: $quantityMax, color: $color, category: $category, categoryId: $categoryId, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
 }
