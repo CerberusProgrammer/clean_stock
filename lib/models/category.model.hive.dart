@@ -40,4 +40,37 @@ class Category extends HiveObject {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  factory Category.fromJson(Map<String, dynamic> json) {
+    return Category(
+      id: json['id'],
+      parentId: json['parentId'],
+      name: json['name'],
+      icon: json['icon'],
+      description: json['description'],
+      status: json['status'],
+      color: json['color'],
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'parentId': parentId,
+      'name': name,
+      'icon': icon,
+      'description': description,
+      'status': status,
+      'color': color,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  @override
+  String toString() {
+    return 'Category(id: $id, parentId: $parentId, name: $name, icon: $icon, description: $description, status: $status, color: $color, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
 }
