@@ -1,4 +1,4 @@
-import 'package:clean_stock/models/supplier.dart';
+import 'package:clean_stock/models/supplier.g.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

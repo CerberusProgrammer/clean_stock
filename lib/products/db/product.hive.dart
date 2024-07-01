@@ -1,4 +1,4 @@
-import 'package:clean_stock/products/product.dart';
+import 'package:clean_stock/products/product.g.dart';
 import 'package:clean_stock/products/product.query.dart';
 import 'package:hive/hive.dart';
 

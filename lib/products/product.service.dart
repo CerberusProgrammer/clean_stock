@@ -1,6 +1,6 @@
 import 'package:clean_stock/products/db/product.hive.dart';
 import 'package:clean_stock/products/product.api.dart';
-import 'package:clean_stock/products/product.dart';
+import 'package:clean_stock/products/product.g.dart';
 import 'package:clean_stock/products/product.query.dart';
 
 class ProductService {

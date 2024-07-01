@@ -1,5 +1,5 @@
-import 'package:clean_stock/models/Category.dart';
-import 'package:clean_stock/products/product.dart';
+import 'package:clean_stock/models/category.g.dart';
+import 'package:clean_stock/products/product.g.dart';
 import 'package:clean_stock/products/product.query.dart';
 import 'package:clean_stock/providers/user.riverpod.dart';
 import 'package:clean_stock/products/product.service.dart';
