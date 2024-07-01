@@ -60,4 +60,81 @@ class Manufacturer extends HiveObject {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  factory Manufacturer.fromJson(Map<String, dynamic> json) {
+    return Manufacturer(
+      id: json['id'],
+      name: json['name'],
+      icon: json['icon'],
+      description: json['description'],
+      address: json['address'],
+      website: json['website'],
+      contactEmail: json['contactEmail'],
+      contactPhone: json['contactPhone'],
+      country: json['country'],
+      city: json['city'],
+      status: json['status'],
+      color: json['color'],
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'name': name,
+      'icon': icon,
+      'description': description,
+      'address': address,
+      'website': website,
+      'contactEmail': contactEmail,
+      'contactPhone': contactPhone,
+      'country': country,
+      'city': city,
+      'status': status,
+      'color': color,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+    };
+  }
+
+  Manufacturer copyWith({
+    int? id,
+    String? name,
+    String? icon,
+    String? description,
+    String? address,
+    String? website,
+    String? contactEmail,
+    String? contactPhone,
+    String? country,
+    String? city,
+    bool? status,
+    String? color,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return Manufacturer(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      icon: icon ?? this.icon,
+      description: description ?? this.description,
+      address: address ?? this.address,
+      website: website ?? this.website,
+      contactEmail: contactEmail ?? this.contactEmail,
+      contactPhone: contactPhone ?? this.contactPhone,
+      country: country ?? this.country,
+      city: city ?? this.city,
+      status: status ?? this.status,
+      color: color ?? this.color,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
+  @override
+  String toString() {
+    return 'Manufacturer(id: $id, name: $name, icon: $icon, description: $description, address: $address, website: $website, contactEmail: $contactEmail, contactPhone: $contactPhone, country: $country, city: $city, status: $status, color: $color, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
 }
