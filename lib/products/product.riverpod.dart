@@ -29,6 +29,12 @@ final createProductProvider =
   return createdProduct;
 });
 
+final deleteProductProvider =
+    FutureProvider.autoDispose.family<void, int>((ref, productId) async {
+  await ProductService.deleteProduct(id: productId.toString(), token: '');
+  ref.read(productsNotifierProvider.notifier).remove(productId);
+});
+
 class ProductsNotifier extends StateNotifier<List<Product>> {
   ProductsNotifier() : super([]);
 
