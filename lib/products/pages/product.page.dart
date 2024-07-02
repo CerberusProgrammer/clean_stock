@@ -20,6 +20,8 @@ class ProductPage extends ConsumerStatefulWidget {
 }
 
 class _ProductPageState extends ConsumerState<ProductPage> {
+  TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     ref.watch(productsInitializationProvider);
@@ -64,6 +66,17 @@ class _ProductPageState extends ConsumerState<ProductPage> {
             child: products.isEmpty
                 ? const Text('No hay productos disponibles.')
                 : Column(children: [
+                    TextField(
+                      controller: searchController,
+                      decoration: const InputDecoration(
+                        hintText: 'Search product by name or barcode',
+                        prefixIcon: Icon(Icons.search),
+                      ),
+                      onChanged: (value) {
+                        print('XX');
+                        ref.read(searchQueryProvider.notifier).state = value;
+                      },
+                    ),
                     Row(
                       children: [
                         Expanded(
@@ -96,20 +109,32 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                         ),
                       ],
                     ),
-                    ...products.map(
-                      (product) => ListTile(
-                        title: Text(product.name),
-                        subtitle:
-                            Text(product.description ?? 'Sin descripción'),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () => ref.read(
-                            deleteProductProvider(product.id).future,
-                          ),
-                        ),
-                        onTap: () => context.go('/products/${product.id}'),
-                      ),
-                    ),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        final filteredProducts =
+                            ref.watch(filteredProductsProvider);
+
+                        return Column(
+                          children: [
+                            ...filteredProducts.map(
+                              (product) => ListTile(
+                                title: Text(product.name),
+                                subtitle: Text(
+                                    product.description ?? 'Sin descripción'),
+                                trailing: IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () => ref.read(
+                                    deleteProductProvider(product.id).future,
+                                  ),
+                                ),
+                                onTap: () =>
+                                    context.go('/products/${product.id}'),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    )
                   ])),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text('Error: $error')),
