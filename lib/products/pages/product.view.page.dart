@@ -29,7 +29,8 @@ class ProductViewPage extends ConsumerWidget {
     }
 
     return HomeLayout(
-      children: ListView(
+      children: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text('Product ID: ${product.id}'),
           Text('Product Name: ${product.name}'),
