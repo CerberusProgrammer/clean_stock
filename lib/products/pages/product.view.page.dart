@@ -11,7 +11,7 @@ class ProductViewPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     if (productId != null) {
-      final product = ref.watch(testProductProvider(productId!));
+      final product = ref.watch(productProvider(productId!));
 
       return HomeLayout(
         children: product.when(

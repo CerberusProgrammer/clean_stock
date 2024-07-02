@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 import 'package:clean_stock/core/domain/domain.dart';
-import 'package:clean_stock/products/product.g.dart';
-import 'package:clean_stock/products/product.query.dart';
+import 'package:clean_stock/products/models/product.dart';
+import 'package:clean_stock/products/models/product.query.dart';
 import 'package:http/http.dart' as http;
 
 class ProductAPI {

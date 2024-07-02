@@ -1,4 +1,4 @@
-import 'package:clean_stock/models/category.g.dart';
+import 'package:clean_stock/models/ccategory.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

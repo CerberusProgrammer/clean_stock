@@ -1,106 +1,80 @@
-import 'package:hive_flutter/hive_flutter.dart';
+// GENERATED CODE - DO NOT MODIFY BY HAND
 
-@HiveType(typeId: 1)
-class Supplier extends HiveObject {
-  @HiveField(0)
-  final int? id;
-  @HiveField(1)
-  final String name;
-  @HiveField(2)
-  final String? icon;
-  @HiveField(3)
-  final String? description;
-  @HiveField(4)
-  final String? address;
-  @HiveField(5)
-  final String? website;
-  @HiveField(6)
-  final String? contactEmail;
-  @HiveField(7)
-  final String? contactPhone;
-  @HiveField(8)
-  final String? country;
-  @HiveField(9)
-  final String? city;
-  @HiveField(10)
-  final bool status;
-  @HiveField(11)
-  final String? color;
-  @HiveField(12)
-  final DateTime createdAt;
-  @HiveField(13)
-  final DateTime updatedAt;
+part of 'supplier.dart';
 
-  Supplier({
-    this.id,
-    required this.name,
-    this.icon,
-    this.description,
-    this.address,
-    this.website,
-    this.contactEmail,
-    this.contactPhone,
-    this.country,
-    this.city,
-    required this.status,
-    this.color,
-    required this.createdAt,
-    required this.updatedAt,
-  });
+// **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
 
-  factory Supplier.fromJson(Map<String, dynamic> json) => Supplier(
-        id: json['id'],
-        name: json['name'],
-        icon: json['icon'],
-        description: json['description'],
-        address: json['address'],
-        website: json['website'],
-        contactEmail: json['contact_email'],
-        contactPhone: json['contact_phone'],
-        country: json['country'],
-        city: json['city'],
-        status: json['status'],
-        color: json['color'],
-        createdAt: DateTime.parse(json['created_at']),
-        updatedAt: DateTime.parse(json['updated_at']),
-      );
-
-  Map<String, dynamic> toJson() => {
-        'id': id,
-        'name': name,
-        'icon': icon,
-        'description': description,
-        'address': address,
-        'website': website,
-        'contact_email': contactEmail,
-        'contact_phone': contactPhone,
-        'country': country,
-        'city': city,
-        'status': status,
-        'color': color,
-        'created_at': createdAt.toIso8601String(),
-        'updated_at': updatedAt.toIso8601String(),
-      };
-
-  Map<String, dynamic> toJsonForSQL() => {
-        'id': id,
-        'name': name,
-        'icon': icon,
-        'description': description,
-        'address': address,
-        'website': website,
-        'contact_email': contactEmail,
-        'contact_phone': contactPhone,
-        'country': country,
-        'city': city,
-        'status': status ? 1 : 0,
-        'color': color,
-        'created_at': createdAt.toIso8601String(),
-        'updated_at': updatedAt.toIso8601String(),
-      };
+class SupplierAdapter extends TypeAdapter<Supplier> {
+  @override
+  final int typeId = 3;
 
   @override
-  String toString() {
-    return 'Supplier{userId: $id, name: $name, icon: $icon, description: $description, address: $address, website: $website, contactEmail: $contactEmail, contactPhone: $contactPhone, country: $country, city: $city, status: $status, color: $color, createdAt: $createdAt, updatedAt: $updatedAt}';
+  Supplier read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Supplier(
+      id: fields[0] as int?,
+      name: fields[1] as String,
+      icon: fields[2] as String?,
+      description: fields[3] as String?,
+      address: fields[4] as String?,
+      website: fields[5] as String?,
+      contactEmail: fields[6] as String?,
+      contactPhone: fields[7] as String?,
+      country: fields[8] as String?,
+      city: fields[9] as String?,
+      status: fields[10] as bool,
+      color: fields[11] as String?,
+      createdAt: fields[12] as DateTime,
+      updatedAt: fields[13] as DateTime,
+    );
   }
+
+  @override
+  void write(BinaryWriter writer, Supplier obj) {
+    writer
+      ..writeByte(14)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.icon)
+      ..writeByte(3)
+      ..write(obj.description)
+      ..writeByte(4)
+      ..write(obj.address)
+      ..writeByte(5)
+      ..write(obj.website)
+      ..writeByte(6)
+      ..write(obj.contactEmail)
+      ..writeByte(7)
+      ..write(obj.contactPhone)
+      ..writeByte(8)
+      ..write(obj.country)
+      ..writeByte(9)
+      ..write(obj.city)
+      ..writeByte(10)
+      ..write(obj.status)
+      ..writeByte(11)
+      ..write(obj.color)
+      ..writeByte(12)
+      ..write(obj.createdAt)
+      ..writeByte(13)
+      ..write(obj.updatedAt);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SupplierAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

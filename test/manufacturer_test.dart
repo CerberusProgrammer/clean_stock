@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:clean_stock/models/manufacturer.g.dart';
+import 'package:clean_stock/models/manufacturer.dart';
 
 void main() {
   test('Manufacturer toJson() should return a valid JSON map', () {

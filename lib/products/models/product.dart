@@ -1,7 +1,9 @@
-import 'package:clean_stock/models/category.g.dart';
-import 'package:clean_stock/models/manufacturer.g.dart';
-import 'package:clean_stock/models/supplier.g.dart';
+import 'package:clean_stock/models/ccategory.dart';
+import 'package:clean_stock/models/manufacturer.dart';
+import 'package:clean_stock/models/supplier.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+
+part 'product.g.dart';
 
 @HiveType(typeId: 0)
 class Product extends HiveObject {

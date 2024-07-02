@@ -1,16 +1,17 @@
-import 'package:clean_stock/products/product.g.dart';
-import 'package:clean_stock/products/product.query.dart';
+import 'package:clean_stock/products/models/product.dart';
+import 'package:clean_stock/products/models/product.query.dart';
 import 'package:hive/hive.dart';
 
 class ProductHive {
-  static Box<Product> getProductsBox() => Hive.box<Product>('products');
+  static Future<Box<Product>> getProductsBox() =>
+      Hive.openBox<Product>('products');
 
   static Future<List<Product>> getProducts({
     required String token,
     required ProductQueryParams queryParams,
   }) async {
     try {
-      final box = getProductsBox();
+      final box = await getProductsBox();
       final List<Product> products = box.values.toList();
 
       return products.where((product) {
@@ -45,14 +46,14 @@ class ProductHive {
   }
 
   static Future<Product?> getProductById(int id) async {
-    final box = getProductsBox();
+    final box = await getProductsBox();
     final product = box.values.firstWhere((product) => product.id == id);
 
     return product;
   }
 
-  static Future<Product> addProduct(Product product) async {
-    final box = getProductsBox();
+  static Future<Product> addProduct({required Product product}) async {
+    final box = await getProductsBox();
     final key = await box.add(product);
     final addedProduct = box.get(key);
 
@@ -60,7 +61,7 @@ class ProductHive {
   }
 
   static Future<Product> updateProduct(Product product) async {
-    final box = getProductsBox();
+    final box = await getProductsBox();
     final key = box.keys.firstWhere((key) => box.get(key)!.id == product.id);
     await box.put(key, product);
 
@@ -68,13 +69,13 @@ class ProductHive {
   }
 
   static Future<void> deleteProduct(int id) async {
-    final box = getProductsBox();
+    final box = await getProductsBox();
     final key = box.keys.firstWhere((key) => box.get(key)!.id == id);
     await box.delete(key);
   }
 
   static Future<void> deleteAllProducts() async {
-    final box = getProductsBox();
+    final box = await getProductsBox();
     await box.clear();
   }
 }

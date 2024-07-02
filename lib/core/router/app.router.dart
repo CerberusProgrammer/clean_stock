@@ -1,8 +1,8 @@
 import 'package:clean_stock/pages/home.page.dart';
 import 'package:clean_stock/pages/profile.page.dart';
 import 'package:clean_stock/pages/settings.page.dart';
-import 'package:clean_stock/products/product.page.dart';
-import 'package:clean_stock/products/product.view.page.dart';
+import 'package:clean_stock/products/pages/product.page.dart';
+import 'package:clean_stock/products/pages/product.view.page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
