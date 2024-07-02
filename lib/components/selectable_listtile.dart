@@ -6,11 +6,13 @@ class SelectableListTile extends StatefulWidget {
     required this.title,
     required this.icon,
     required this.onTap,
+    this.selected = false,
   });
 
   final String title;
   final IconData icon;
   final Function(bool isTapped) onTap;
+  final bool selected;
 
   @override
   State<SelectableListTile> createState() => _SelectableListTileState();
@@ -23,7 +25,7 @@ class _SelectableListTileState extends State<SelectableListTile> {
   Widget build(BuildContext context) {
     return CheckboxListTile(
       title: Text(widget.title),
-      value: _isSelected,
+      value: _isSelected || widget.selected,
       onChanged: (bool? value) {
         setState(() {
           _isSelected = !_isSelected;
