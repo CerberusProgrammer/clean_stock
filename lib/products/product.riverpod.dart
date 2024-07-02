@@ -1,48 +1,49 @@
 import 'package:clean_stock/products/models/product.dart';
-import 'package:clean_stock/products/models/product.query.dart';
-import 'package:clean_stock/providers/user.riverpod.dart';
 import 'package:clean_stock/products/product.service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final productsState = StateProvider<List<Product>>((ref) {
-  return [];
+final productsNotifierProvider =
+    StateNotifierProvider<ProductsNotifier, List<Product>>((ref) {
+  return ProductsNotifier();
 });
 
-final productsProvider = FutureProvider.autoDispose<List<Product>>((ref) async {
-  ref.watch(productsState);
-  final products = await ProductService.getProducts(
-    queryParams: ProductQueryParams(),
-    token: ref.watch(userProvider).token,
+final productsInitializationProvider = FutureProvider<void>((ref) async {
+  await ref.read(productsNotifierProvider.notifier).initializeProducts();
+});
+
+final productByIdProvider = Provider.family<Product?, String>((ref, productId) {
+  final products = ref.watch(productsNotifierProvider);
+  final intId = int.tryParse(productId);
+  return products.firstWhere(
+    (product) => product.id == intId,
   );
-  return products;
 });
-
-final productProvider = FutureProvider.family.autoDispose<Product, String>(
-  (ref, id) async => ProductService.getProduct(
-    id: id,
-    token: ref.watch(userProvider).token,
-  ),
-);
 
 final createProductProvider =
-    FutureProvider.family.autoDispose<Product, Product>(
-  (ref, product) async => ProductService.createProduct(
-    product: product,
-    token: ref.watch(userProvider).token,
-  ),
-);
+    FutureProvider.autoDispose.family<Product, Product>((ref, product) async {
+  final createdProduct =
+      await ProductService.createProduct(product: product, token: '');
 
-final updateProductProvider =
-    FutureProvider.family.autoDispose<Product, Product>(
-  (ref, product) async => ProductService.updateProduct(
-    product: product,
-    token: ref.watch(userProvider).token,
-  ),
-);
+  ref.read(productsNotifierProvider.notifier).add(createdProduct);
 
-final deleteProductProvider = FutureProvider.family.autoDispose<void, String>(
-  (ref, id) async => ProductService.deleteProduct(
-    id: id,
-    token: ref.watch(userProvider).token,
-  ),
-);
+  return createdProduct;
+});
+
+class ProductsNotifier extends StateNotifier<List<Product>> {
+  ProductsNotifier() : super([]);
+
+  Future<void> initializeProducts() async {
+    final products = await ProductService.getProducts(token: '');
+    state = products;
+  }
+
+  void add(Product product) {
+    state = [...state, product];
+  }
+
+  void remove(int id) {
+    state = state.where((product) => product.id != id).toList();
+  }
+
+  void update(Product product) {}
+}
