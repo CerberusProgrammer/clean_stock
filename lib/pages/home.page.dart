@@ -8,10 +8,20 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(context, ref) {
-    final products = ref.watch(productsState);
+    final products = ref.watch(productsNotifierProvider);
 
     return HomeLayout(
-      children: Center(child: Text('$products')),
+      children: Center(
+        child: ListView.builder(
+          itemCount: products.length,
+          itemBuilder: (context, index) {
+            final product = products[index];
+            return ListTile(
+              title: Text(product.name),
+            );
+          },
+        ),
+      ),
     );
   }
 }
