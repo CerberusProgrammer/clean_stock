@@ -21,11 +21,6 @@ void main() async {
   Hive.registerAdapter(CategoryAdapter());
   Hive.registerAdapter(SupplierAdapter());
 
-  await Hive.openBox<Product>('products');
-  await Hive.openBox<Manufacturer>('manufacturers');
-  await Hive.openBox<Supplier>('suppliers');
-  await Hive.openBox<Category>('categories');
-
   runApp(const ProviderScope(child: MyApp()));
 }
 
