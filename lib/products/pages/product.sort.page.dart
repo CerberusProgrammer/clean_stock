@@ -1,3 +1,4 @@
+import 'package:clean_stock/components/custom_floatingbutton.dart';
 import 'package:clean_stock/components/selectable_listtile.dart';
 import 'package:clean_stock/models/ccategory.dart';
 import 'package:clean_stock/models/manufacturer.dart';
@@ -18,49 +19,55 @@ class ProductSortPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ExpansionTile(
-          title: const Text('Categories'),
-          children: categories
-              .map(
-                (category) => category != null
-                    ? SelectableListTile(
-                        title: category.name,
-                        icon: Icons.category,
-                        onTap: (bool isTapped) {},
-                      )
-                    : const SizedBox(),
-              )
-              .toList(),
-        ),
-        ExpansionTile(
-            title: const Text('Manufacturers'),
-            children: manufacturers
+    return Scaffold(
+      body: ListView(
+        children: [
+          ExpansionTile(
+            title: const Text('Categories'),
+            children: categories
                 .map(
-                  (manufacturer) => manufacturer != null
+                  (category) => category != null
                       ? SelectableListTile(
-                          title: manufacturer.name,
-                          icon: Icons.business,
+                          title: category.name,
+                          icon: Icons.category,
                           onTap: (bool isTapped) {},
                         )
                       : const SizedBox(),
                 )
-                .toList()),
-        ExpansionTile(
-            title: const Text('Suppliers'),
-            children: suppliers
-                .map(
-                  (supplier) => supplier != null
-                      ? SelectableListTile(
-                          title: supplier.name,
-                          icon: Icons.supervisor_account,
-                          onTap: (bool isTapped) {},
-                        )
-                      : const SizedBox(),
-                )
-                .toList())
-      ],
+                .toList(),
+          ),
+          ExpansionTile(
+              title: const Text('Manufacturers'),
+              children: manufacturers
+                  .map(
+                    (manufacturer) => manufacturer != null
+                        ? SelectableListTile(
+                            title: manufacturer.name,
+                            icon: Icons.business,
+                            onTap: (bool isTapped) {},
+                          )
+                        : const SizedBox(),
+                  )
+                  .toList()),
+          ExpansionTile(
+              title: const Text('Suppliers'),
+              children: suppliers
+                  .map(
+                    (supplier) => supplier != null
+                        ? SelectableListTile(
+                            title: supplier.name,
+                            icon: Icons.supervisor_account,
+                            onTap: (bool isTapped) {},
+                          )
+                        : const SizedBox(),
+                  )
+                  .toList())
+        ],
+      ),
+      floatingActionButton: CustomFloatingButton(
+        onPressed: () => Navigator.of(context).pop(),
+        icon: Icons.check,
+      ),
     );
   }
 }
