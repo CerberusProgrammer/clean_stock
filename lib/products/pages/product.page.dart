@@ -39,24 +39,25 @@ class _ProductPageState extends ConsumerState<ProductPage> {
         highlightElevation: 0,
         onPressed: () async {
           final newProduct = Product(
-            id: Random().nextInt(1000000),
-            name: getRandomString(10),
-            price: Random().nextDouble() * 100,
-            description: getRandomString(20),
-            barcode: getRandomString(6),
-            status: Random().nextBool(),
-            quantity: Random().nextInt(100),
-            createdAt:
-                DateTime.now().subtract(Duration(days: Random().nextInt(365))),
-            updatedAt:
-                DateTime.now().subtract(Duration(days: Random().nextInt(365))),
-            category: Category(
-                id: 1,
-                name: 'asd',
-                status: false,
-                createdAt: DateTime.now(),
-                updatedAt: DateTime.now()),
-          );
+              id: Random().nextInt(1000000),
+              name: getRandomString(10),
+              price: Random().nextDouble() * 100,
+              description: getRandomString(20),
+              barcode: getRandomString(6),
+              status: Random().nextBool(),
+              quantity: Random().nextInt(100),
+              createdAt: DateTime.now()
+                  .subtract(Duration(days: Random().nextInt(365))),
+              updatedAt: DateTime.now()
+                  .subtract(Duration(days: Random().nextInt(365))),
+              category: Category(
+                  id: Random().nextInt(1000000),
+                  name: getRandomString(10),
+                  status: Random().nextBool(),
+                  createdAt: DateTime.now()
+                      .subtract(Duration(days: Random().nextInt(365))),
+                  updatedAt: DateTime.now()
+                      .subtract(Duration(days: Random().nextInt(365)))));
           ref.read(createProductProvider(newProduct).future);
         },
         child: const Icon(Icons.add),
@@ -72,10 +73,8 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                         hintText: 'Search product by name or barcode',
                         prefixIcon: Icon(Icons.search),
                       ),
-                      onChanged: (value) {
-                        print('XX');
-                        ref.read(searchQueryProvider.notifier).state = value;
-                      },
+                      onChanged: (value) =>
+                          ref.read(searchQueryProvider.notifier).state = value,
                     ),
                     Row(
                       children: [
