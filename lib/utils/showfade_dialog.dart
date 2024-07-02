@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 Future<Object?> showFadeDialog({
   required BuildContext context,
@@ -15,7 +16,12 @@ Future<Object?> showFadeDialog({
             onPressed: () => Navigator.pop(context),
           ),
         ),
-        body: child,
+        body: Consumer(
+          builder: (context, ref, child) {
+            return child!;
+          },
+          child: child,
+        ),
       ),
       transitionBuilder: (context, animation, secondaryAnimation, child) =>
           FadeTransition(
