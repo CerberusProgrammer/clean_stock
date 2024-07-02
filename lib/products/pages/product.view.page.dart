@@ -10,29 +10,33 @@ class ProductViewPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    if (productId != null) {
-      final product = ref.watch(productProvider(productId!));
-
-      return HomeLayout(
-        children: product.when(
-          data: (data) => ListView(
-            children: [
-              Text('Product ID: ${data.id}'),
-              Text('Product Name: ${data.name}'),
-              Text('Product Price: ${data.price}'),
-              Text('Product Description: ${data.description}'),
-            ],
-          ),
-          loading: () => const Center(
-            child: CircularProgressIndicator(),
-          ),
-          error: (error, stackTrace) => Center(
-            child: Text('Error: $error'),
-          ),
+    if (productId == null) {
+      return const HomeLayout(
+        children: Center(
+          child: Text('No product ID provided'),
         ),
       );
     }
 
-    return const HomeLayout(children: Text('error'));
+    final product = ref.watch(productByIdProvider(productId!));
+
+    if (product == null) {
+      return const HomeLayout(
+        children: Center(
+          child: Text('Product not found'),
+        ),
+      );
+    }
+
+    return HomeLayout(
+      children: ListView(
+        children: [
+          Text('Product ID: ${product.id}'),
+          Text('Product Name: ${product.name}'),
+          Text('Product Price: ${product.price}'),
+          Text('Product Description: ${product.description}'),
+        ],
+      ),
+    );
   }
 }
