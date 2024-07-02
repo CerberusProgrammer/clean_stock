@@ -7,20 +7,22 @@ class HomePage extends ConsumerWidget {
   const HomePage({super.key});
 
   @override
-  Widget build(context, ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.watch(productsInitializationProvider);
+
     final products = ref.watch(productsNotifierProvider);
+    final productsAsyncValue = ref.watch(productsInitializationProvider);
 
     return HomeLayout(
-      children: Center(
-        child: ListView.builder(
-          itemCount: products.length,
-          itemBuilder: (context, index) {
-            final product = products[index];
-            return ListTile(
-              title: Text(product.name),
-            );
-          },
-        ),
+      children: productsAsyncValue.when(
+        data: (_) => Center(
+            child: products.isEmpty
+                ? const Text('No hay productos disponibles.')
+                : Column(
+                    children: products.map((p) => Text(p.barcode)).toList(),
+                  )),
+        loading: () => const Center(child: CircularProgressIndicator()),
+        error: (error, stack) => Center(child: Text('Error: $error')),
       ),
     );
   }
