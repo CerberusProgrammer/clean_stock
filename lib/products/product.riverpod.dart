@@ -2,6 +2,20 @@ import 'package:clean_stock/products/models/product.dart';
 import 'package:clean_stock/products/product.service.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+final searchQueryProvider = StateProvider<String>((ref) {
+  return '';
+});
+
+final filteredProductsProvider = Provider<List<Product>>((ref) {
+  final searchQuery = ref.watch(searchQueryProvider).toLowerCase();
+  final products = ref.watch(productsNotifierProvider);
+
+  return products.where((product) {
+    return product.name.toLowerCase().contains(searchQuery) ||
+        product.barcode.toLowerCase().contains(searchQuery);
+  }).toList();
+});
+
 final productsNotifierProvider =
     StateNotifierProvider<ProductsNotifier, List<Product>>((ref) {
   return ProductsNotifier();
