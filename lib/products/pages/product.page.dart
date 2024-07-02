@@ -76,37 +76,24 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                       onChanged: (value) =>
                           ref.read(searchQueryProvider.notifier).state = value,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomTextButton(
-                            icon: Icons.sort,
-                            title: 'Sort by',
-                            onTap: () => showFadeDialog(
-                              context: context,
-                              title: 'Sort products by',
-                              child: ProductSortPage(
-                                categories: products
-                                    .map((product) => product.category)
-                                    .toList(),
-                                manufacturers: products
-                                    .map((product) => product.manufacturer)
-                                    .toList(),
-                                suppliers: products
-                                    .map((product) => product.supplier)
-                                    .toList(),
-                              ),
-                            ),
-                          ),
+                    CustomTextButton(
+                      icon: Icons.sort,
+                      title: 'Sort by',
+                      onTap: () => showFadeDialog(
+                        context: context,
+                        title: 'Sort products by',
+                        child: ProductSortPage(
+                          categories: products
+                              .map((product) => product.category)
+                              .toList(),
+                          manufacturers: products
+                              .map((product) => product.manufacturer)
+                              .toList(),
+                          suppliers: products
+                              .map((product) => product.supplier)
+                              .toList(),
                         ),
-                        Expanded(
-                          child: CustomTextButton(
-                            icon: Icons.filter_list,
-                            title: 'Filter by',
-                            onTap: () {},
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                     Consumer(
                       builder: (context, ref, child) {
