@@ -39,9 +39,7 @@ class HomeLayout extends StatelessWidget {
                             ),
                           ),
                         ),
-                    body: Column(
-                      children: [children],
-                    ),
+                    body: ListView(children: [children]),
                   ),
                 ),
               ],
