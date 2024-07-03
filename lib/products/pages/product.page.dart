@@ -2,7 +2,6 @@ import 'package:clean_stock/components/custom_floatingbutton.dart';
 import 'package:clean_stock/components/custom_textbutton.dart';
 import 'package:clean_stock/products/pages/product.sort.page.dart';
 import 'package:clean_stock/products/product.riverpod.dart';
-import 'package:clean_stock/utils/generate_random_product.dart';
 import 'package:clean_stock/utils/showfade_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,10 +27,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
 
     return HomeLayout(
       floatingButton: CustomFloatingButton(
-        onPressed: () async {
-          final newProduct = generateRandomProduct();
-          ref.read(createProductProvider(newProduct).future);
-        },
+        onPressed: () => context.go('/products/create'),
         icon: Icons.add,
       ),
       children: productsAsyncValue.when(
