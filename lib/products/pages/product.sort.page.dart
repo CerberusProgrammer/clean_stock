@@ -1,4 +1,3 @@
-import 'package:clean_stock/components/custom_textbutton.dart';
 import 'package:clean_stock/components/selectable_listtile.dart';
 import 'package:clean_stock/models/ccategory.dart';
 import 'package:clean_stock/models/manufacturer.dart';
@@ -22,103 +21,95 @@ class ProductSortPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedCategories = ref.watch(selectedCategoriesProvider);
-    final selectedManufacturers = ref.watch(selectedManufacturersProvider);
-    final selectedSuppliers = ref.watch(selectedSuppliersProvider);
 
     return Scaffold(
-        body: ListView(
-          children: [
-            ExpansionTile(
-              title: const Text('Categories'),
-              children: categories.map((category) {
-                if (category == null) {
-                  return Container();
-                }
+      body: ListView(
+        children: [
+          ExpansionTile(
+            title: const Text('Categories'),
+            initiallyExpanded: selectedCategories.isNotEmpty,
+            children: categories.map((category) {
+              if (category == null) {
+                return Container();
+              }
 
-                final isSelected = selectedCategories.contains(category);
+              final isSelected = selectedCategories.contains(category);
 
-                return SelectableListTile(
-                  title: category.name,
-                  icon: Icons.category,
-                  selected: isSelected,
-                  onTap: (value) {
-                    if (isSelected) {
-                      ref.read(selectedCategoriesProvider.notifier).update(
-                          (state) =>
-                              state.where((c) => c != category).toList());
-                    } else {
-                      ref
-                          .read(selectedCategoriesProvider.notifier)
-                          .update((state) => [...state, category]);
-                    }
-                  },
-                );
-              }).toList(),
-            ),
-            ExpansionTile(
-              title: const Text('Manufacturers'),
-              children: manufacturers.map((manufacturer) {
-                final isSelected = selectedManufacturers.contains(manufacturer);
-                if (manufacturer == null) {
-                  return Container();
-                }
+              return SelectableListTile(
+                title: category.name,
+                icon: Icons.category,
+                selected: isSelected,
+                onTap: (value) {
+                  if (isSelected) {
+                    ref.read(selectedCategoriesProvider.notifier).update(
+                        (state) => state.where((c) => c != category).toList());
+                  } else {
+                    ref
+                        .read(selectedCategoriesProvider.notifier)
+                        .update((state) => [...state, category]);
+                  }
+                },
+              );
+            }).toList(),
+          ),
+          ExpansionTile(
+            title: const Text('Manufacturers'),
+            children: manufacturers.map((manufacturer) {
+              if (manufacturer == null) {
+                return Container();
+              }
 
-                return SelectableListTile(
-                  title: manufacturer.name,
-                  icon: Icons.business,
-                  selected: isSelected,
-                  onTap: (value) {
-                    if (isSelected) {
-                      ref.read(selectedManufacturersProvider.notifier).state =
-                          selectedManufacturers
-                              .where((m) => m != manufacturer)
-                              .toList();
-                    } else {
-                      ref.read(selectedManufacturersProvider.notifier).state = [
-                        ...selectedManufacturers,
-                      ];
-                    }
-                  },
-                );
-              }).toList(),
-            ),
-            ExpansionTile(
-              title: const Text('Suppliers'),
-              children: suppliers.map((supplier) {
-                final isSelected = selectedSuppliers.contains(supplier);
+              final isSelected = ref
+                  .watch(selectedManufacturersProvider)
+                  .contains(manufacturer);
 
-                if (supplier == null) {
-                  return Container();
-                }
+              return SelectableListTile(
+                title: manufacturer.name,
+                icon: Icons.business,
+                selected: isSelected,
+                onTap: (value) {
+                  if (isSelected) {
+                    ref.read(selectedManufacturersProvider.notifier).update(
+                        (state) =>
+                            state.where((m) => m != manufacturer).toList());
+                  } else {
+                    ref
+                        .read(selectedManufacturersProvider.notifier)
+                        .update((state) => [...state, manufacturer]);
+                  }
+                },
+              );
+            }).toList(),
+          ),
+          ExpansionTile(
+            title: const Text('Suppliers'),
+            children: suppliers.map((supplier) {
+              if (supplier == null) {
+                return Container();
+              }
 
-                return SelectableListTile(
-                  title: supplier.name,
-                  icon: Icons.supervisor_account,
-                  selected: isSelected,
-                  onTap: (value) {
-                    if (isSelected) {
-                      ref.read(selectedSuppliersProvider.notifier).state =
-                          selectedSuppliers
-                              .where((s) => s != supplier)
-                              .toList();
-                    } else {
-                      ref.read(selectedSuppliersProvider.notifier).state = [
-                        ...selectedSuppliers,
-                      ];
-                    }
-                  },
-                );
-              }).toList(),
-            ),
-          ],
-        ),
-        floatingActionButton: CustomTextButton(
-          onTap: () {
-            ref.read(selectedCategoriesProvider.notifier).state = [];
-            ref.read(selectedManufacturersProvider.notifier).state = [];
-            ref.read(selectedSuppliersProvider.notifier).state = [];
-          },
-          title: 'Limpiar Filtros',
-        ));
+              final isSelected =
+                  ref.watch(selectedSuppliersProvider).contains(supplier);
+
+              return SelectableListTile(
+                title: supplier.name,
+                icon: Icons.supervisor_account,
+                selected: isSelected,
+                onTap: (value) {
+                  if (isSelected) {
+                    ref.read(selectedSuppliersProvider.notifier).update(
+                        (state) => state.where((s) => s != supplier).toList());
+                  } else {
+                    ref
+                        .read(selectedSuppliersProvider.notifier)
+                        .update((state) => [...state, supplier]);
+                  }
+                },
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
   }
 }
