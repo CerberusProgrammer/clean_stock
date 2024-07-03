@@ -1,6 +1,7 @@
 import 'package:clean_stock/pages/home.page.dart';
 import 'package:clean_stock/pages/profile.page.dart';
 import 'package:clean_stock/pages/settings.page.dart';
+import 'package:clean_stock/products/pages/product.create.page.dart';
 import 'package:clean_stock/products/pages/product.page.dart';
 import 'package:clean_stock/products/pages/product.view.page.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,11 @@ final appRouter = GoRouter(
         pageBuilder: (context, state) =>
             const NoTransitionPage(child: ProductPage()),
         routes: [
+          GoRoute(
+              path: 'create',
+              pageBuilder: (context, state) {
+                return const NoTransitionPage(child: ProductCreatePage());
+              }),
           GoRoute(
             path: ':id',
             pageBuilder: (context, state) {
