@@ -22,10 +22,16 @@ class _SelectableListTileState extends State<SelectableListTile> {
   bool _isSelected = false;
 
   @override
+  void initState() {
+    super.initState();
+    _isSelected = widget.selected;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return CheckboxListTile(
       title: Text(widget.title),
-      value: _isSelected || widget.selected,
+      value: _isSelected,
       onChanged: (bool? value) {
         setState(() {
           _isSelected = !_isSelected;
