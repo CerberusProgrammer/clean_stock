@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:clean_stock/components/custom_floatingbutton.dart';
 import 'package:clean_stock/components/custom_textbutton.dart';
 import 'package:clean_stock/models/ccategory.dart';
 import 'package:clean_stock/products/models/product.dart';
@@ -30,13 +31,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
     final productsAsyncValue = ref.watch(productsInitializationProvider);
 
     return HomeLayout(
-      floatingButton: FloatingActionButton(
-        elevation: 0,
-        focusElevation: 0,
-        hoverElevation: 0,
-        disabledElevation: 0,
-        enableFeedback: true,
-        highlightElevation: 0,
+      floatingButton: CustomFloatingButton(
         onPressed: () async {
           final newProduct = Product(
               id: Random().nextInt(1000000),
@@ -60,7 +55,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                       .subtract(Duration(days: Random().nextInt(365)))));
           ref.read(createProductProvider(newProduct).future);
         },
-        child: const Icon(Icons.add),
+        icon: Icons.add,
       ),
       children: productsAsyncValue.when(
         data: (_) => Center(
