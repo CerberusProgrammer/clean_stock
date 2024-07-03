@@ -1,12 +1,8 @@
-import 'dart:math';
-
 import 'package:clean_stock/components/custom_floatingbutton.dart';
 import 'package:clean_stock/components/custom_textbutton.dart';
-import 'package:clean_stock/models/ccategory.dart';
-import 'package:clean_stock/products/models/product.dart';
 import 'package:clean_stock/products/pages/product.sort.page.dart';
 import 'package:clean_stock/products/product.riverpod.dart';
-import 'package:clean_stock/utils/random_string.dart';
+import 'package:clean_stock/utils/generate_random_product.dart';
 import 'package:clean_stock/utils/showfade_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -33,26 +29,7 @@ class _ProductPageState extends ConsumerState<ProductPage> {
     return HomeLayout(
       floatingButton: CustomFloatingButton(
         onPressed: () async {
-          final newProduct = Product(
-              id: Random().nextInt(1000000),
-              name: getRandomString(10),
-              price: Random().nextDouble() * 100,
-              description: getRandomString(20),
-              barcode: getRandomString(6),
-              status: Random().nextBool(),
-              quantity: Random().nextInt(100),
-              createdAt: DateTime.now()
-                  .subtract(Duration(days: Random().nextInt(365))),
-              updatedAt: DateTime.now()
-                  .subtract(Duration(days: Random().nextInt(365))),
-              category: Category(
-                  id: Random().nextInt(1000000),
-                  name: getRandomString(10),
-                  status: Random().nextBool(),
-                  createdAt: DateTime.now()
-                      .subtract(Duration(days: Random().nextInt(365))),
-                  updatedAt: DateTime.now()
-                      .subtract(Duration(days: Random().nextInt(365)))));
+          final newProduct = generateRandomProduct();
           ref.read(createProductProvider(newProduct).future);
         },
         icon: Icons.add,
