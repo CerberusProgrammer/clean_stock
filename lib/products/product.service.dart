@@ -36,5 +36,5 @@ class ProductService {
     required String id,
     required String token,
   }) async =>
-      await ProductHive.deleteProduct(int.parse(id));
+      await ProductHive.deleteProduct(id);
 }
