@@ -7,7 +7,7 @@ final colorProvider = StateProvider<Color>((ref) {
 });
 
 final brighnessProvider = StateProvider<Brightness>((ref) {
-  return Brightness.light;
+  return Brightness.dark;
 });
 
 final themeProvider = Provider<ThemeData>(
