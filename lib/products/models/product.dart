@@ -8,7 +8,7 @@ part 'product.g.dart';
 @HiveType(typeId: 0)
 class Product extends HiveObject {
   @HiveField(0)
-  final int id;
+  final String id;
   @HiveField(1)
   final String name;
   @HiveField(2)
@@ -193,7 +193,7 @@ class Product extends HiveObject {
       };
 
   copyWith({
-    int? id,
+    String? id,
     String? name,
     String? description,
     String? barcode,
