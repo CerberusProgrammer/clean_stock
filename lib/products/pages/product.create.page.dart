@@ -133,6 +133,18 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                   labelText: 'Product name',
                   controller: nameController,
                   selectedColor: selectedColor,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                ),
+                const SizedBox(height: 16),
+                CleanTextField(
+                  labelText: 'Price',
+                  controller: nameController,
+                  selectedColor: selectedColor,
+                  onChanged: (value) {
+                    setState(() {});
+                  },
                 ),
               ],
             ),
