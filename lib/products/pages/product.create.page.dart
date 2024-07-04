@@ -8,6 +8,7 @@ import 'package:clean_stock/products/models/product.dart';
 import 'package:clean_stock/products/product.riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
 
 class ProductCreatePage extends ConsumerStatefulWidget {
   const ProductCreatePage({super.key});
@@ -44,7 +45,7 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
               ref.read(
                 createProductProvider(
                   Product(
-                    id: 0,
+                    id: const Uuid().v4().toString(),
                     name: nameController.text,
                     barcode: 'barcode',
                     status: true,
@@ -52,6 +53,7 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                     quantity: 0,
                     createdAt: DateTime.now(),
                     updatedAt: DateTime.now(),
+                    color: 'rojo xd',
                   ),
                 ).future,
               );
@@ -143,6 +145,7 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                 ],
               ),
               CleanContainer(
+                selectedColor: selectedColor,
                 child: Column(
                   children: [
                     CleanTextField(
@@ -170,6 +173,7 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
               ),
               const SizedBox(height: 16),
               CleanContainer(
+                selectedColor: selectedColor,
                 padding: const EdgeInsets.all(0),
                 child: ExpansionTile(
                   childrenPadding: const EdgeInsets.all(16),
@@ -186,7 +190,8 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                     ),
                   ],
                 ),
-              )
+              ),
+              const SizedBox(height: 90)
             ],
           ),
         ));
