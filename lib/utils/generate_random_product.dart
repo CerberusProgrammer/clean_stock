@@ -5,10 +5,11 @@ import 'package:clean_stock/models/manufacturer.dart';
 import 'package:clean_stock/models/supplier.dart';
 import 'package:clean_stock/products/models/product.dart';
 import 'package:clean_stock/utils/random_string.dart';
+import 'package:uuid/uuid.dart';
 
 Product generateRandomProduct() {
   return Product(
-    id: Random().nextInt(1000000),
+    id: const Uuid().v4().toString(),
     name: getRandomString(10),
     price: Random().nextDouble() * 100,
     description: getRandomString(20),
@@ -33,7 +34,7 @@ Product generateRandomProduct() {
       ),
     ),
     supplier: Supplier(
-      id: Random().nextInt(1000000),
+      id: const Uuid().v4().toString(),
       name: getRandomString(10),
       status: Random().nextBool(),
       createdAt: DateTime.now().subtract(
