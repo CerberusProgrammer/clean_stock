@@ -7,12 +7,18 @@ class CleanTextField extends StatelessWidget {
     this.selectedColor,
     this.labelText,
     this.hintText,
+    this.prefix,
+    this.suffix,
+    this.onChanged,
   });
 
   final TextEditingController? controller;
   final String? labelText;
   final String? hintText;
   final Color? selectedColor;
+  final Widget? prefix;
+  final Widget? suffix;
+  final Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +29,7 @@ class CleanTextField extends StatelessWidget {
       controller: controller,
       cursorColor: effectiveColor.withOpacity(0.6),
       cursorErrorColor: effectiveColor.withOpacity(0.6),
+      cursorWidth: 2,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
@@ -31,6 +38,14 @@ class CleanTextField extends StatelessWidget {
         focusColor: effectiveColor.withOpacity(0.6),
         hoverColor: effectiveColor.withOpacity(0.6),
         labelStyle: TextStyle(color: effectiveColor),
+        prefix: prefix,
+        suffix: suffix,
+        hintStyle: TextStyle(color: effectiveColor.withOpacity(0.6)),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+          borderSide: BorderSide(color: effectiveColor.withOpacity(0.6)),
+          gapPadding: 8,
+        ),
         border: OutlineInputBorder(
           borderRadius: const BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(color: effectiveColor.withOpacity(0.6)),
@@ -43,7 +58,7 @@ class CleanTextField extends StatelessWidget {
           gapPadding: 10,
         ),
       ),
-      onChanged: (value) {},
+      onChanged: onChanged,
     );
   }
 }
