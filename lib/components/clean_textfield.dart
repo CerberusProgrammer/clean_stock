@@ -1,4 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+enum TextFieldType {
+  onlyText,
+  onlyNumbers,
+  alphaCode,
+  onlyFloat,
+  onlyFloatCommercial
+}
 
 class CleanTextField extends StatelessWidget {
   const CleanTextField({
@@ -10,8 +19,10 @@ class CleanTextField extends StatelessWidget {
     this.prefix,
     this.suffix,
     this.onChanged,
+    this.type,
   });
 
+  final TextFieldType? type;
   final TextEditingController? controller;
   final String? labelText;
   final String? hintText;
@@ -22,6 +33,38 @@ class CleanTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<TextInputFormatter> inputFormatters = [];
+    TextInputType keyboardType = TextInputType.text;
+
+    if (type != null) {
+      switch (type!) {
+        case TextFieldType.onlyText:
+          inputFormatters
+              .add(FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')));
+          keyboardType = TextInputType.text;
+          break;
+        case TextFieldType.onlyNumbers:
+          inputFormatters.add(FilteringTextInputFormatter.digitsOnly);
+          keyboardType = TextInputType.number;
+          break;
+        case TextFieldType.alphaCode:
+          inputFormatters
+              .add(FilteringTextInputFormatter.allow(RegExp('[a-zA-Z0-9]')));
+          keyboardType = TextInputType.text;
+          break;
+        case TextFieldType.onlyFloat:
+          inputFormatters
+              .add(FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*')));
+          keyboardType = const TextInputType.numberWithOptions(decimal: true);
+          break;
+        case TextFieldType.onlyFloatCommercial:
+          inputFormatters.add(
+              FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d{0,2}')));
+          keyboardType = const TextInputType.numberWithOptions(decimal: true);
+          break;
+      }
+    }
+
     Color effectiveColor =
         selectedColor ?? Theme.of(context).colorScheme.primary;
 
@@ -30,6 +73,8 @@ class CleanTextField extends StatelessWidget {
       cursorColor: effectiveColor.withOpacity(0.6),
       cursorErrorColor: effectiveColor.withOpacity(0.6),
       cursorWidth: 2,
+      inputFormatters: inputFormatters,
+      keyboardType: keyboardType,
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
