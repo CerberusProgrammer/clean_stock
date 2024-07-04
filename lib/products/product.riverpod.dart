@@ -77,7 +77,7 @@ final createProductProvider =
 });
 
 final deleteProductProvider =
-    FutureProvider.autoDispose.family<void, int>((ref, productId) async {
+    FutureProvider.autoDispose.family<void, String>((ref, productId) async {
   await ProductService.deleteProduct(id: productId.toString(), token: '');
   ref.read(productsNotifierProvider.notifier).remove(productId);
 });
@@ -94,7 +94,7 @@ class ProductsNotifier extends StateNotifier<List<Product>> {
     state = [...state, product];
   }
 
-  void remove(int id) {
+  void remove(String id) {
     state = state.where((product) => product.id != id).toList();
   }
 
