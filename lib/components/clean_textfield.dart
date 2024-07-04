@@ -20,8 +20,10 @@ class CleanTextField extends StatelessWidget {
     this.suffix,
     this.onChanged,
     this.type,
+    this.isRequired = false,
   });
 
+  final bool? isRequired;
   final TextFieldType? type;
   final TextEditingController? controller;
   final String? labelText;
@@ -68,13 +70,21 @@ class CleanTextField extends StatelessWidget {
     Color effectiveColor =
         selectedColor ?? Theme.of(context).colorScheme.primary;
 
-    return TextField(
+    return TextFormField(
       controller: controller,
       cursorColor: effectiveColor.withOpacity(0.6),
       cursorErrorColor: effectiveColor.withOpacity(0.6),
       cursorWidth: 2,
       inputFormatters: inputFormatters,
       keyboardType: keyboardType,
+      validator: (value) {
+        if (isRequired != null ? isRequired! : false) {
+          if (value == null || value.isEmpty) {
+            return 'This field is required.';
+          }
+        }
+        return null;
+      },
       decoration: InputDecoration(
         labelText: labelText,
         hintText: hintText,
