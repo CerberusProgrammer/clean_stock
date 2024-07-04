@@ -20,17 +20,16 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
   Color? selectedColor;
 
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
 
   final colorsOptions = [
     Colors.red,
     Colors.green,
     Colors.blue,
-    Colors.yellow,
     Colors.purple,
     Colors.orange,
     Colors.pink,
     Colors.teal,
-    Colors.cyan,
     Colors.brown,
   ];
 
@@ -108,9 +107,13 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                         child: CleanCard(
                           color: selectedColor,
                           padding: null,
-                          child: const Center(
+                          child: Center(
                             child: Text(
-                              'MXN \$00.00',
+                              priceController.text.isEmpty
+                                  ? 'MXN \$00.00'
+                                  : priceController.text.length > 7
+                                      ? 'MXN \$${priceController.text.substring(0, 5)}...'
+                                      : 'MXN \$${priceController.text}',
                             ),
                           ),
                         ),
@@ -140,8 +143,9 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                 const SizedBox(height: 16),
                 CleanTextField(
                   labelText: 'Price',
-                  controller: nameController,
+                  controller: priceController,
                   selectedColor: selectedColor,
+                  type: TextFieldType.onlyFloatCommercial,
                   onChanged: (value) {
                     setState(() {});
                   },
