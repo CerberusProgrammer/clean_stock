@@ -45,7 +45,7 @@ class ProductHive {
     }
   }
 
-  static Future<Product?> getProductById(int id) async {
+  static Future<Product?> getProductById(String id) async {
     final box = await getProductsBox();
     final product = box.values.firstWhere((product) => product.id == id);
 
@@ -68,7 +68,7 @@ class ProductHive {
     return product;
   }
 
-  static Future<void> deleteProduct(int id) async {
+  static Future<void> deleteProduct(String id) async {
     final box = await getProductsBox();
     final key = box.keys.firstWhere((key) => box.get(key)!.id == id);
     await box.delete(key);
