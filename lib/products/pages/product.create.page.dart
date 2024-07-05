@@ -1,5 +1,6 @@
 import 'package:clean_stock/components/clean_card.dart';
 import 'package:clean_stock/components/clean_container.dart';
+import 'package:clean_stock/components/clean_dropdownmenu.dart';
 import 'package:clean_stock/components/clean_iconbutton.dart';
 import 'package:clean_stock/components/clean_textfield.dart';
 import 'package:clean_stock/components/custom_floatingbutton.dart';
@@ -24,6 +25,10 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
+  final TextEditingController currencyController = TextEditingController();
+
+  final TextEditingController barcodeController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
   final colorsOptions = [
     Colors.red,
@@ -53,7 +58,14 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                     quantity: 0,
                     createdAt: DateTime.now(),
                     updatedAt: DateTime.now(),
-                    color: 'rojo xd',
+                    color: selectedColor != null
+                        ? selectedColor!.value.toRadixString(16).substring(2)
+                        : Theme.of(context)
+                            .colorScheme
+                            .primary
+                            .value
+                            .toRadixString(16)
+                            .substring(2),
                   ),
                 ).future,
               );
@@ -70,6 +82,7 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   CleanIconButton(
+                    icon: Icons.palette,
                     color: selectedColor,
                     onTap: () => showModalBottomSheet(
                       context: context,
@@ -91,6 +104,7 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                             children: [
                               ...colorsOptions.map(
                                 (color) => CleanIconButton(
+                                  icon: Icons.palette,
                                   color: color,
                                   onTap: () {
                                     Navigator.of(context).pop();
@@ -142,8 +156,21 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                       ),
                     ),
                   ),
+                  const SizedBox(width: 16),
+                  CleanIconButton(
+                    icon: Icons.delete,
+                    color: selectedColor,
+                    onTap: () {
+                      nameController.clear();
+                      priceController.clear();
+                      setState(() {
+                        selectedColor = null;
+                      });
+                    },
+                  ),
                 ],
               ),
+              const SizedBox(width: 16),
               CleanContainer(
                 selectedColor: selectedColor,
                 child: Column(
@@ -158,15 +185,29 @@ class _ProductCreatePageState extends ConsumerState<ProductCreatePage> {
                       },
                     ),
                     const SizedBox(height: 16),
-                    CleanTextField(
-                      isRequired: true,
-                      labelText: 'Price',
-                      controller: priceController,
-                      selectedColor: selectedColor,
-                      type: TextFieldType.onlyFloatCommercial,
-                      onChanged: (value) {
-                        setState(() {});
-                      },
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CleanTextField(
+                            isRequired: true,
+                            labelText: 'Price',
+                            controller: priceController,
+                            selectedColor: selectedColor,
+                            type: TextFieldType.onlyFloatCommercial,
+                            onChanged: (value) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        const CleanDropdownMenu(
+                          entries: [
+                            DropdownMenuEntry(value: 'MXN', label: 'MXN'),
+                            DropdownMenuEntry(value: 'USD', label: 'USD'),
+                            DropdownMenuEntry(value: 'EUR', label: 'EUR'),
+                          ],
+                        ),
+                      ],
                     ),
                   ],
                 ),
