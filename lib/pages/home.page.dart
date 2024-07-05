@@ -19,7 +19,18 @@ class HomePage extends ConsumerWidget {
             child: products.isEmpty
                 ? const Text('No hay productos disponibles.')
                 : Column(
-                    children: products.map((p) => Text(p.barcode)).toList(),
+                    children: products
+                        .map(
+                          (p) => Column(
+                            children: [
+                              Text(p.id),
+                              Text(p.barcode),
+                              Text(p.name),
+                              Text(p.price.toString()),
+                            ],
+                          ),
+                        )
+                        .toList(),
                   )),
         loading: () => const Center(child: CircularProgressIndicator()),
         error: (error, stack) => Center(child: Text('Error: $error')),
