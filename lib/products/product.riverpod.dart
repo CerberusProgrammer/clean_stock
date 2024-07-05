@@ -60,9 +60,8 @@ final productsInitializationProvider = FutureProvider<void>((ref) async {
 
 final productByIdProvider = Provider.family<Product?, String>((ref, productId) {
   final products = ref.watch(productsNotifierProvider);
-  final intId = int.tryParse(productId);
   return products.firstWhere(
-    (product) => product.id == intId,
+    (product) => product.id == productId,
   );
 });
 
