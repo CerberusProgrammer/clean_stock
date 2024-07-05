@@ -7,12 +7,14 @@ class CleanIconButton extends StatefulWidget {
     this.onTap,
     this.isExpanded = false,
     this.size = const Size(40, 40),
+    required this.icon,
   });
 
+  final IconData icon;
   final Color? color;
   final Function()? onTap;
-  final bool isExpanded;
-  final Size size;
+  final bool? isExpanded;
+  final Size? size;
 
   @override
   State<CleanIconButton> createState() => _CleanIconButtonState();
@@ -32,14 +34,14 @@ class _CleanIconButtonState extends State<CleanIconButton> {
       highlightColor: effectiveColor.withOpacity(0.1),
       hoverColor: effectiveColor.withOpacity(0.1),
       child: Container(
-        height: widget.size.height,
-        width: widget.size.width,
+        height: widget.size!.height,
+        width: widget.size!.width,
         decoration: BoxDecoration(
           color: effectiveColor.withOpacity(0.1),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Icon(
-          Icons.palette,
+          widget.icon,
           color: effectiveColor.withOpacity(0.6),
         ),
       ),
