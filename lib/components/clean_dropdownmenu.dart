@@ -23,11 +23,11 @@ class CleanDropdownMenu<T> extends StatelessWidget {
       hintText: hintText,
       helperText: helperText,
       dropdownMenuEntries: entries,
+      initialSelection: entries.first.value,
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
-          borderSide:
-              BorderSide(color: effectiveColor.withOpacity(0.6), width: 20),
+          borderSide: BorderSide.none,
           gapPadding: 8,
         ),
       ),
