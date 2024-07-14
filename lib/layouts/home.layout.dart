@@ -14,6 +14,10 @@ class HomeLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final route = GoRouter.of(context).routerDelegate.currentConfiguration;
+    final fullPathRoute = route.fullPath;
+    final String? parameterRoute = route.pathParameters['id'];
+
     return OrientationBuilder(
       builder: (context, orientation) {
         final isLandscape = orientation == Orientation.landscape;
@@ -32,11 +36,9 @@ class HomeLayout extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Breadcrumbs(
-                              currentPath: GoRouter.of(context)
-                                  .routerDelegate
-                                  .currentConfiguration
-                                  .fullPath,
-                            ),
+                                currentPath: parameterRoute != null
+                                    ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
+                                    : fullPathRoute),
                           ),
                         ),
                     body: ListView(children: [children]),
@@ -50,12 +52,9 @@ class HomeLayout extends StatelessWidget {
           return Scaffold(
             appBar: appBar ??
                 AppBar(
-                  title: Text(formatPath(
-                    GoRouter.of(context)
-                        .routerDelegate
-                        .currentConfiguration
-                        .fullPath,
-                  )),
+                  title: Text(formatPath(parameterRoute != null
+                      ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
+                      : fullPathRoute)),
                 ),
             drawer: const Drawerbar(),
             body: ListView(children: [children]),
