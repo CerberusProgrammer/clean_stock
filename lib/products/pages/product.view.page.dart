@@ -29,6 +29,7 @@ class ProductViewPage extends ConsumerWidget {
     }
 
     return HomeLayout(
+      titleLastPath: product.name,
       children: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
