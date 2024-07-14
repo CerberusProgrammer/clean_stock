@@ -16,8 +16,6 @@ class CleanDropdownMenu<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Color effectiveColor = color ?? Theme.of(context).colorScheme.primary;
-
     return DropdownMenu(
       enableSearch: true,
       hintText: hintText,
