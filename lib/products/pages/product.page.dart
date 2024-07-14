@@ -81,8 +81,12 @@ class _ProductPageState extends ConsumerState<ProductPage> {
                                     deleteProductProvider(product.id).future,
                                   ),
                                 ),
-                                onTap: () =>
-                                    context.go('/products/${product.id}'),
+                                onTap: () => context.go(
+                                  '/products/${product.id}',
+                                  extra: {
+                                    'product': product,
+                                  },
+                                ),
                               ),
                             ),
                           ],
