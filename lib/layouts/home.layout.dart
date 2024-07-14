@@ -5,12 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class HomeLayout extends StatelessWidget {
-  const HomeLayout(
-      {super.key, required this.children, this.floatingButton, this.appBar});
+  const HomeLayout({
+    super.key,
+    required this.children,
+    this.floatingButton,
+    this.appBar,
+    this.titleLastPath,
+  });
 
   final Widget children;
   final Widget? floatingButton;
   final AppBar? appBar;
+  final String? titleLastPath;
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +42,11 @@ class HomeLayout extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Breadcrumbs(
-                                currentPath: parameterRoute != null
-                                    ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
-                                    : fullPathRoute),
+                                currentPath: titleLastPath != null
+                                    ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$titleLastPath'
+                                    : parameterRoute != null
+                                        ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
+                                        : fullPathRoute),
                           ),
                         ),
                     body: ListView(children: [children]),
