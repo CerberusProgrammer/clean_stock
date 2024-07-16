@@ -60,7 +60,7 @@ class ProductHive {
     return addedProduct!;
   }
 
-  static Future<Product> updateProduct(Product product) async {
+  static Future<Product> updateProduct({required Product product}) async {
     final box = await getProductsBox();
     final key = box.keys.firstWhere((key) => box.get(key)!.id == product.id);
     await box.put(key, product);
