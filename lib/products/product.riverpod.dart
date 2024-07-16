@@ -65,6 +65,12 @@ final productByIdProvider = Provider.family<Product?, String>((ref, productId) {
   );
 });
 
+final updateProductProvider =
+    FutureProvider.autoDispose.family<void, Product>((ref, product) async {
+  await ProductService.updateProduct(product: product);
+  ref.read(productsNotifierProvider.notifier).update(product);
+});
+
 final createProductProvider =
     FutureProvider.autoDispose.family<Product, Product>((ref, product) async {
   final createdProduct =
@@ -97,5 +103,9 @@ class ProductsNotifier extends StateNotifier<List<Product>> {
     state = state.where((product) => product.id != id).toList();
   }
 
-  void update(Product product) {}
+  void update(Product updatedProduct) {
+    state = state.map((product) {
+      return product.id == updatedProduct.id ? updatedProduct : product;
+    }).toList();
+  }
 }
