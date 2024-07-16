@@ -28,9 +28,8 @@ class ProductService {
 
   static Future<Product> updateProduct({
     required Product product,
-    required String token,
   }) async =>
-      await ProductAPI.updateProduct(product: product, token: token);
+      await ProductHive.updateProduct(product: product);
 
   static Future<void> deleteProduct({
     required String id,
