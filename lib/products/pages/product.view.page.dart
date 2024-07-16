@@ -30,24 +30,27 @@ class ProductViewPage extends ConsumerWidget {
 
     return HomeLayout(
       titleLastPath: product.name,
-      children: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Product ID: ${product.id}'),
-          Text('Product Name: ${product.name}'),
-          Text('Product Price: ${product.price}'),
-          Text('Product Description: ${product.description}'),
-          Text('Product Category: ${product.category}'),
-          Text('Product Manufacturer: ${product.manufacturer}'),
-          Text('Product Supplier: ${product.supplier}'),
-          Text('Product Quantity: ${product.quantity}'),
-          Text('Product Quantity Min: ${product.quantityMin}'),
-          Text('Product Quantity Max: ${product.quantityMax}'),
-          Text('Product Color: ${product.color}'),
-          Text('Product Status: ${product.status}'),
-          Text('Product Created At: ${product.createdAt}'),
-          Text('Product Updated At: ${product.updatedAt}'),
-        ],
+      children: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Product ID: ${product.id}'),
+            Text('Product Name: ${product.name}'),
+            Text('Product Price: ${product.price}'),
+            Text('Product Description: ${product.description}'),
+            Text('Product Category: ${product.category}'),
+            Text('Product Manufacturer: ${product.manufacturer}'),
+            Text('Product Supplier: ${product.supplier}'),
+            Text('Product Quantity: ${product.quantity}'),
+            Text('Product Quantity Min: ${product.quantityMin}'),
+            Text('Product Quantity Max: ${product.quantityMax}'),
+            Text('Product Color: ${product.color}'),
+            Text('Product Status: ${product.status}'),
+            Text('Product Created At: ${product.createdAt}'),
+            Text('Product Updated At: ${product.updatedAt}'),
+          ],
+        ),
       ),
     );
   }
