@@ -60,9 +60,11 @@ class HomeLayout extends StatelessWidget {
           return Scaffold(
             appBar: appBar ??
                 AppBar(
-                  title: Text(formatPath(parameterRoute != null
-                      ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
-                      : fullPathRoute)),
+                  title: Text(titleLastPath != null
+                      ? titleLastPath!
+                      : formatPath(parameterRoute != null
+                          ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
+                          : fullPathRoute)),
                 ),
             drawer: const Drawerbar(),
             body: ListView(children: [children]),
