@@ -3,6 +3,7 @@ import 'package:clean_stock/pages/profile.page.dart';
 import 'package:clean_stock/pages/settings.page.dart';
 import 'package:clean_stock/products/pages/product.create.page.dart';
 import 'package:clean_stock/products/pages/product.page.dart';
+import 'package:clean_stock/products/pages/product.view.edit.page.dart';
 import 'package:clean_stock/products/pages/product.view.page.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -36,6 +37,15 @@ final appRouter = GoRouter(
               );
             },
           ),
+          GoRoute(
+              path: ':id/edit',
+              pageBuilder: (context, state) {
+                final productId = state.pathParameters['id'];
+
+                return NoTransitionPage(
+                  child: ProductViewEditPage(productId: productId),
+                );
+              }),
         ]),
     GoRoute(
         path: '/settings',
