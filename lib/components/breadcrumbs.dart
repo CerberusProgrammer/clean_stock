@@ -3,8 +3,13 @@ import 'package:go_router/go_router.dart';
 
 class Breadcrumbs extends StatelessWidget {
   final String currentPath;
+  final Map<String, String>? parameterObject;
 
-  const Breadcrumbs({super.key, required this.currentPath});
+  const Breadcrumbs({
+    super.key,
+    required this.currentPath,
+    this.parameterObject,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +21,20 @@ class Breadcrumbs extends StatelessWidget {
 
     for (int i = 0; i < pathSegments.length; i++) {
       String segment = pathSegments[i];
+      String title = segment[0].toUpperCase() + segment.substring(1);
+
+      if (segment.startsWith(':')) {
+        segment = parameterObject!["id"]!;
+        title = parameterObject!["name"]!;
+      }
+
       if (i < pathSegments.length - 1) {
         cumulativePath += '/$segment';
+
         breadcrumbWidgets.add(
           TextButton(
             onPressed: () => context.go(cumulativePath),
-            child: Text(segment[0].toUpperCase() + segment.substring(1)),
+            child: Text(title),
           ),
         );
       } else {
