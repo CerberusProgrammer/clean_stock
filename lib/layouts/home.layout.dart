@@ -11,12 +11,14 @@ class HomeLayout extends StatelessWidget {
     this.floatingButton,
     this.appBar,
     this.titleLastPath,
+    this.forceIdName,
   });
 
   final Widget children;
   final Widget? floatingButton;
   final AppBar? appBar;
   final String? titleLastPath;
+  final String? forceIdName;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +44,19 @@ class HomeLayout extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Breadcrumbs(
-                                currentPath: titleLastPath != null
-                                    ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$titleLastPath'
-                                    : parameterRoute != null
-                                        ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
-                                        : fullPathRoute),
+                              currentPath: titleLastPath != null
+                                  ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$titleLastPath'
+                                  : parameterRoute != null
+                                      ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
+                                      : fullPathRoute,
+                              parameterObject: parameterRoute != null
+                                  ? {
+                                      'id': parameterRoute,
+                                      'name':
+                                          forceIdName ?? titleLastPath ?? '',
+                                    }
+                                  : null,
+                            ),
                           ),
                         ),
                     body: ListView(children: [children]),
@@ -60,11 +70,15 @@ class HomeLayout extends StatelessWidget {
           return Scaffold(
             appBar: appBar ??
                 AppBar(
-                  title: Text(titleLastPath != null
-                      ? titleLastPath!
-                      : formatPath(parameterRoute != null
-                          ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
-                          : fullPathRoute)),
+                  title: Text(
+                    titleLastPath != null
+                        ? titleLastPath!
+                        : formatPath(
+                            parameterRoute != null
+                                ? '${fullPathRoute.substring(0, fullPathRoute.length - 3)}$parameterRoute'
+                                : fullPathRoute,
+                          ),
+                  ),
                 ),
             drawer: const Drawerbar(),
             body: ListView(children: [children]),
