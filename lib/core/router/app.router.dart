@@ -28,24 +28,25 @@ final appRouter = GoRouter(
                 return const NoTransitionPage(child: ProductCreatePage());
               }),
           GoRoute(
-            path: ':id',
-            pageBuilder: (context, state) {
-              final productId = state.pathParameters['id'];
-
-              return NoTransitionPage(
-                child: ProductViewPage(productId: productId),
-              );
-            },
-          ),
-          GoRoute(
-              path: ':id/edit',
+              path: ':id',
               pageBuilder: (context, state) {
                 final productId = state.pathParameters['id'];
 
                 return NoTransitionPage(
-                  child: ProductViewEditPage(productId: productId),
+                  child: ProductViewPage(productId: productId),
                 );
-              }),
+              },
+              routes: [
+                GoRoute(
+                    path: 'edit',
+                    pageBuilder: (context, state) {
+                      final productId = state.pathParameters['id'];
+
+                      return NoTransitionPage(
+                        child: ProductViewEditPage(productId: productId),
+                      );
+                    }),
+              ]),
         ]),
     GoRoute(
         path: '/settings',
