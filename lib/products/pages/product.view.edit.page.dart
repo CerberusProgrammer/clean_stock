@@ -14,13 +14,14 @@ class ProductViewEditPage extends ConsumerStatefulWidget {
 }
 
 class _ProductViewEditPageState extends ConsumerState<ProductViewEditPage> {
+  Product? product;
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameController;
 
   @override
   void initState() {
     super.initState();
-    final product = ref.read(productByIdProvider(widget.productId!));
+    product = ref.read(productByIdProvider(widget.productId!));
     _nameController = TextEditingController(text: product?.name ?? '');
   }
 
@@ -52,7 +53,8 @@ class _ProductViewEditPageState extends ConsumerState<ProductViewEditPage> {
   @override
   Widget build(BuildContext context) {
     return HomeLayout(
-      titleLastPath: 'Edit Product',
+      titleLastPath: 'dit Product',
+      forceIdName: product?.name,
       floatingButton: CustomFloatingButton(
         onPressed: _updateProduct,
         icon: Icons.done,
