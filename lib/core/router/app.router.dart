@@ -1,3 +1,4 @@
+import 'package:clean_stock/categories/pages/category.page.dart';
 import 'package:clean_stock/pages/home.page.dart';
 import 'package:clean_stock/pages/profile.page.dart';
 import 'package:clean_stock/pages/settings.page.dart';
@@ -49,6 +50,13 @@ final appRouter = GoRouter(
               ]),
         ]),
     GoRoute(
+      path: '/categories',
+      name: 'categories',
+      pageBuilder: (context, state) => const NoTransitionPage(
+        child: CategoryPage(),
+      ),
+    ),
+    GoRoute(
         path: '/settings',
         name: 'settings',
         pageBuilder: (context, state) =>
@@ -75,6 +83,12 @@ const appRoutes = [
     "icon": Icons.shopping_bag,
     "secondaryIcon": Icons.shopping_bag_outlined,
     "route": "/products",
+  },
+  {
+    "title": "Categories",
+    "icon": Icons.category,
+    "secondaryIcon": Icons.category_outlined,
+    "route": "/categories",
   },
   {
     "title": "Settings",
