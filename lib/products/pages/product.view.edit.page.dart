@@ -1,3 +1,4 @@
+import 'package:clean_stock/components/clean_textfield.dart';
 import 'package:clean_stock/components/custom_floatingbutton.dart';
 import 'package:clean_stock/layouts/home.layout.dart';
 import 'package:clean_stock/products/models/product.dart';
@@ -18,12 +19,48 @@ class _ProductViewEditPageState extends ConsumerState<ProductViewEditPage> {
   Product? product;
   final _formKey = GlobalKey<FormState>();
   late TextEditingController _nameController;
+  late TextEditingController _descriptionController;
+  late TextEditingController _barcodeController;
+  late TextEditingController _weightController;
+  late TextEditingController _dimensionController;
+  late TextEditingController _expirationDateController;
+  late TextEditingController _locationController;
+  late TextEditingController _statusController;
+  late TextEditingController _priceController;
+  late TextEditingController _quantityController;
+  late TextEditingController _quantityMinController;
+  late TextEditingController _quantityMaxController;
+  late TextEditingController _colorController;
+  late TextEditingController _categoryController;
 
   @override
   void initState() {
     super.initState();
     product = ref.read(productByIdProvider(widget.productId!));
     _nameController = TextEditingController(text: product?.name ?? '');
+    _descriptionController =
+        TextEditingController(text: product?.description ?? '');
+    _barcodeController = TextEditingController(text: product?.barcode ?? '');
+    _weightController =
+        TextEditingController(text: product?.weight.toString() ?? '');
+    _dimensionController =
+        TextEditingController(text: product?.dimension ?? '');
+    _expirationDateController =
+        TextEditingController(text: product?.expirationDate.toString() ?? '');
+    _locationController = TextEditingController(text: product?.location ?? '');
+    _statusController =
+        TextEditingController(text: product?.status.toString() ?? '');
+    _priceController =
+        TextEditingController(text: product?.price.toString() ?? '');
+    _quantityController =
+        TextEditingController(text: product?.quantity.toString() ?? '');
+    _quantityMinController =
+        TextEditingController(text: product?.quantityMin.toString() ?? '');
+    _quantityMaxController =
+        TextEditingController(text: product?.quantityMax.toString() ?? '');
+    _colorController = TextEditingController(text: product?.color ?? '');
+    _categoryController =
+        TextEditingController(text: product?.category.toString() ?? '');
   }
 
   @override
@@ -64,15 +101,61 @@ class _ProductViewEditPageState extends ConsumerState<ProductViewEditPage> {
         key: _formKey,
         child: Column(
           children: [
-            TextFormField(
+            CleanTextField(
+              controller: _barcodeController,
+              labelText: 'Product Barcode',
+            ),
+            CleanTextField(
               controller: _nameController,
-              decoration: const InputDecoration(labelText: 'Product Name'),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter a product name';
-                }
-                return null;
-              },
+              labelText: 'Product Name',
+            ),
+            CleanTextField(
+              controller: _descriptionController,
+              labelText: 'Product Description',
+            ),
+            CleanTextField(
+              controller: _weightController,
+              labelText: 'Product Weight',
+            ),
+            CleanTextField(
+              controller: _dimensionController,
+              labelText: 'Product Dimension',
+            ),
+            CleanTextField(
+              controller: _expirationDateController,
+              labelText: 'Product Expiration Date',
+            ),
+            CleanTextField(
+              controller: _locationController,
+              labelText: 'Product Location',
+            ),
+            CleanTextField(
+              controller: _statusController,
+              labelText: 'Product Status',
+            ),
+            CleanTextField(
+              controller: _priceController,
+              labelText: 'Product Price',
+            ),
+            CleanTextField(
+              controller: _quantityController,
+              labelText: 'Product Quantity',
+            ),
+            CleanTextField(
+              controller: _quantityMinController,
+              labelText: 'Product Quantity Min',
+            ),
+            CleanTextField(
+              controller: _quantityMaxController,
+              labelText: 'Product Quantity Max',
+            ),
+            CleanTextField(
+              controller: _colorController,
+              labelText: 'Product Color',
+            ),
+            CleanTextField(
+              controller: _categoryController,
+              labelText: 'Product Category',
             ),
           ],
         ),
