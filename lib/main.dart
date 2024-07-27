@@ -1,6 +1,6 @@
 import 'package:clean_stock/core/router/app.router.dart';
 import 'package:clean_stock/core/theme/app.theme.dart';
-import 'package:clean_stock/models/ccategory.dart';
+import 'package:clean_stock/categories/models/ccategory.dart';
 import 'package:clean_stock/models/manufacturer.dart';
 import 'package:clean_stock/models/supplier.dart';
 import 'package:clean_stock/products/models/product.dart';
