@@ -4,6 +4,7 @@ import 'package:clean_stock/products/models/product.dart';
 import 'package:clean_stock/products/product.riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class ProductViewEditPage extends ConsumerStatefulWidget {
   const ProductViewEditPage({super.key, required this.productId});
@@ -46,7 +47,7 @@ class _ProductViewEditPageState extends ConsumerState<ProductViewEditPage> {
 
       ref.read(updateProductProvider(updatedProduct).future);
 
-      Navigator.of(context).pop();
+      context.go('/products');
     }
   }
 
@@ -73,7 +74,6 @@ class _ProductViewEditPageState extends ConsumerState<ProductViewEditPage> {
                 return null;
               },
             ),
-            // Añade más campos aquí
           ],
         ),
       ),
