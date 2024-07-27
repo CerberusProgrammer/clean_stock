@@ -1,4 +1,4 @@
-import 'package:clean_stock/models/ccategory.dart';
+import 'package:clean_stock/categories/models/ccategory.dart';
 import 'package:clean_stock/models/manufacturer.dart';
 import 'package:clean_stock/models/supplier.dart';
 import 'package:hive_flutter/hive_flutter.dart';
